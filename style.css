@@ -1,0 +1,15 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+/* .bg-image{
+    background-image: url(https://www.taylorguitars.com/sites/default/files/styles/hero_rotator_image/public/images/2022-04/Taylor-new-for-22-acoustic-hero.jpg.webp?itok=ZFMF0C-H);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    opacity: 0.9;   
+
+} */

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Sign Up</title>
+    <!-- <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 1rem;
+        }
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+        }
+    </style> -->
+</head>
+
+<body>
+    <div class="bg-white dark:bg-gray-900">
+        <div class="flex justify-center h-screen">
+            <div class="hidden bg-cover lg:block lg:w-2/3"
+                style="background-image: url(https://www.geekslab.co/wp-content/uploads/2019/10/shutterstock_177758375-760x420.jpg)">
+                <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+                    <div>
+                        <h2 class="text-2xl italic text-white sm:text-3xl">Eddie Van Halen</h2>
+
+                        <p class="max-w-xl mt-3 text-gray-200">
+                            A guitar is a very personal extension of the person playing it. You have to be emotionally and spiritually connected to your instrument. I'm very brutal on my instruments, but not all the time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+                <div class="flex-1">
+                    <div class="text-center">
+                        <div class="flex justify-center mx-auto">
+                            <!-- <img class="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt=""> -->
+                            <h1 class="font-bold text-3xl">AjayTuner</h1>
+                        </div>
+
+                        <p class="mt-3 text-gray-500 dark:text-gray-300">Sign up for a new account</p>
+                    </div>
+
+                    <div class="mt-8">
+                        <form>
+                            <div class="grid-container grid grid-cols-2 gap-4">
+                                <div class="input-container col-span-1 row-span-2">
+                                    <label for="first_name"
+                                        class="block mb-2 text-sm text-gray-600 dark:text-gray-200">First Name</label>
+                                    <input type="text" name="first_name" id="first_name" placeholder="Your First Name"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+
+                                <div class="input-container">
+                                    <label for="last_name"
+                                        class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Last Name</label>
+                                    <input type="text" name="last_name" id="last_name" placeholder="Your Last Name"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+
+                                <div class="input-container col-span-3">
+                                    <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email
+                                        Address</label>
+                                    <input type="email" name="email" id="email" placeholder="example@example.com"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+
+                                <div class="input-container col-span-3">
+                                    <label for="password"
+                                        class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
+                                    <input type="password" name="password" id="password" placeholder="Your Password"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+
+                                <div class="input-container col-span-3">
+                                    <label for="confirm_password"
+                                        class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Confirm
+                                        Password</label>
+                                    <input type="password" name="confirm_password" id="confirm_password"
+                                        placeholder="Confirm Password"
+                                        class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <button
+                                    id="signup"
+                                    class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                    Sign Up
+                                </button>
+                            </div>
+                        </form>
+
+                        <p class="mt-6 text-sm text-center text-gray-400">Already have an account? <a href="login.html"
+                                class="text-blue-500 focus:outline-none focus:underline hover:underline">Sign in</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+          authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+          projectId: "guitar-tunner-9bd54",
+          storageBucket: "guitar-tunner-9bd54.appspot.com",
+          messagingSenderId: "534214805325",
+          appId: "1:534214805325:web:8941f0e10a240d5d085904",
+          measurementId: "G-4F13BLVGNM"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth()
+        console.log(app)
+
+        signup.addEventListener('click', (e) =>{
+            e.preventDefault()
+            const firstName = document.getElementById('first_name').value;
+            const lastName = document.getElementById('last_name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+
+            if(password === confirmPassword){
+                createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    window.location = "index.html"
+                    console.log(user)
+                    alert("User Created")
+                    const authtenticated = userCredential.user
+                    sessionStorage.setItem('userAuthenticated', 'true')
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage)
+                    // ..
+                });
+            }
+            else{
+                alert("Passwords do not match")
+            }
+        })
+      </script>
+</body>
+
+</html>
