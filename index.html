@@ -52,8 +52,8 @@
 			</li>
 			<li><a class="text-sm text-gray-400 hover:text-gray-500" href="#">Shop</a></li>
 		</ul>
-		<a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" href="#">Sign In</a>
-		<a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" href="#">Sign up</a>
+		<a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200" id="signin-res" href="login.html">Sign In</a>
+		<a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200" id="signup-res" href="signup.html">Sign up</a>
 	</nav>
 	<div class="navbar-menu relative z-50 hidden">
 		<div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -92,11 +92,11 @@
 			</div>
 			<div class="mt-auto">
 				<div class="pt-6">
-					<a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold bg-gray-50 hover:bg-gray-100 rounded-xl" href="#">Sign in</a>
-					<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" href="#">Sign Up</a>
+					<a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold bg-gray-50 hover:bg-gray-100 rounded-xl" id="signin" href="login.html">Sign in</a>
+					<a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl" id="signup" href="signup.html">Sign Up</a>
 				</div>
 				<p class="my-4 text-xs text-center text-gray-400">
-					<span>Copyright © 2021</span>
+					<span>Copyright © 2023</span>
 				</p>
 			</div>
 		</nav>
@@ -113,12 +113,6 @@
                     you tune your guitar. It uses the microphone of your device to detect the frequency of the string
                     you are playing and tells you whether the string is in tune or not.</p>
             </div>
-        </div>
-        <div class="flex justify-center mt-8">
-            <a href="login.html"
-                class="login inline-block justify-self-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Log In
-            </a>
         </div>
     </div>
 
@@ -253,13 +247,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-        // const userAuthtenticated = sessionStorage.getItem('userAuthenticated');
-        // if (userAuthtenticated === 'true') {
-        //     const getStarted = document.getElementById('get-started');
-        //     const loginBtn = document.querySelector('.login')
-        //     getStarted.style.display = 'none'
-        //     loginBtn.style.display = 'none'
-        // }
+        const userAuthtenticated = sessionStorage.getItem('userAuthenticated');
+        if (userAuthtenticated === 'true') {
+            const signup = document.getElementById('signup');
+            const signin = document.getElementById('signin')
+            const signupRes = document.getElementById('signup-res');
+            const signinRes = document.getElementById('signin-res')
+            signupRes.style.display = 'none'
+            signinRes.style.display = 'none'
+            signin.style.display = 'none'
+            signup.style.display = 'none'
+        }
 
         const toggleButton = document.querySelector('[data-collapse-toggle="navbar-cta"]');
         const navbarCta = document.querySelector('#navbar-cta');
