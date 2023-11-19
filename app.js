@@ -1,5 +1,5 @@
-const userAuthtenticated = sessionStorage.getItem('userAuthenticated');
-if (userAuthtenticated === 'true') {
+const userAuthenticated = sessionStorage.getItem('userAuthenticated');
+if (userAuthenticated === 'true') {
     const signup = document.getElementById('signup');
     const signin = document.getElementById('signin')
     const signupRes = document.getElementById('signup-res');
@@ -52,3 +52,25 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 const toggleButton = document.querySelector('[data-collapse-toggle="navbar-cta"]');
 const navbarCta = document.querySelector('#navbar-cta');
+
+// let timeOut;
+// function resetTimeout() {
+//     clearTimeout(timeOut);
+//     timeOut = setTimeout(logout, 3000)
+// }
+
+// function logout() {
+//     auth.signOut().then(() => {
+//         sessionStorage.removeItem('userAuthenticated')
+//         window.location.href = 'login.html'
+//     })
+//         .catch((error) => {
+//             console.log('Error logging out', error);
+//         })
+// }
+
+// document.addEventListener('mousemove', resetTimeout);
+// document.addEventListener('keypress', resetTimeout);
+// document.addEventListener('mousedown', resetTimeout);
+
+// resetTimeout();

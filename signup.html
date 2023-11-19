@@ -31,7 +31,9 @@
                         <h2 class="text-2xl italic text-white sm:text-3xl">Eddie Van Halen</h2>
 
                         <p class="max-w-xl mt-3 text-gray-200">
-                            A guitar is a very personal extension of the person playing it. You have to be emotionally and spiritually connected to your instrument. I'm very brutal on my instruments, but not all the time.
+                            A guitar is a very personal extension of the person playing it. You have to be emotionally
+                            and spiritually connected to your instrument. I'm very brutal on my instruments, but not all
+                            the time.
                         </p>
                     </div>
                 </div>
@@ -103,8 +105,7 @@
                             </div>
 
                             <div class="mt-6">
-                                <button
-                                    id="signup"
+                                <button id="signup"
                                     class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                     Sign Up
                                 </button>
@@ -124,30 +125,33 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
-      
+
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-          apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
-          authDomain: "guitar-tunner-9bd54.firebaseapp.com",
-          projectId: "guitar-tunner-9bd54",
-          storageBucket: "guitar-tunner-9bd54.appspot.com",
-          messagingSenderId: "534214805325",
-          appId: "1:534214805325:web:8941f0e10a240d5d085904",
-          measurementId: "G-4F13BLVGNM"
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
         };
-      
+
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const analytics = getAnalytics(app);
         const auth = getAuth()
+        const db = getDatabase(app)
         console.log(app)
+        console.log(db)
 
-        signup.addEventListener('click', (e) =>{
+        signup.addEventListener('click', (e) => {
             e.preventDefault()
             const firstName = document.getElementById('first_name').value;
             const lastName = document.getElementById('last_name').value;
@@ -155,39 +159,61 @@
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirm_password').value;
 
-            if(password === confirmPassword){
+            if (password === confirmPassword) {
                 createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Signed in 
-                    const user = userCredential.user;
-                    window.location = "index.html"
-                    console.log(user)
-                    alert("User Created")
-                    const authtenticated = userCredential.user
-                    sessionStorage.setItem('userAuthenticated', 'true')
-                    const success = document.querySelector('.success')
-                    success.classList.remove('hidden')
+                    .then((userCredential) => {
+                        // Signed in 
+                        const user = userCredential.user;
+                        const userId = user.uid;
 
-                    setTimeout(() => {
-                        window.location.href = 'index.html'
-                    }, 2000)
-                    // ...
-                })
-                .catch((error) => {
-                    const errorMsg = document.querySelector('.error')
-                    errorMsg.classList.remove('hidden')
 
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    alert(errorMessage)
-                    // ..
-                });
+                        const userData = {
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email
+                        }
+
+                        // db.ref('users/' + userId).set(userData)
+                        set(ref(db, 'Users/' + user.uid), { userData })
+                            .then(() => {
+                                console.log(user)
+                                alert("User Created")
+                                const authtenticated = userCredential.user
+                                sessionStorage.setItem('userAuthenticated', 'true')
+                                const success = document.querySelector('.success')
+                                success.classList.remove('hidden')
+                                console.log('Data saved')
+
+                                setTimeout(() => {
+                                    window.location.href = 'index.html'
+                                }, 2000)
+                            })
+                            .catch((error) => {
+                                // const errorMsg = document.querySelector('.error')
+                                // errorMsg.classList.remove('hidden')
+                                // console.log(error)
+                                console.log('Data not saved')
+                            })
+                    })
+                    .catch((error) => {
+                        // const errorMsg = document.querySelector('.error')
+                        // errorMsg.classList.remove('hidden')
+
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        alert(errorMessage)
+                        // // ..
+
+                        console.log('User not created')
+                    });
             }
-            else{
+            else {
                 alert("Passwords do not match")
             }
         })
-      </script>
+
+       
+    </script>
 </body>
 
 </html>

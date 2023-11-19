@@ -123,7 +123,8 @@
         </nav>
     </div>
 
-    <div class="bg-image bg-cover bg-opacity-50 bg-center sm:bg-contain md:bg-cover">        <div class="max-w-screen-xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+    <div class="bg-image bg-cover bg-opacity-50 bg-center sm:bg-contain md:bg-cover">
+        <div class="max-w-screen-xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div class="text-center">
                 <h2 class="text-2xl font-semibold text-blue-600 tracking-wide uppercase">AjayTuner</h2>
                 <p
@@ -184,7 +185,7 @@
                     <!-- Jamming session items will be generated here -->
                 </div>
                 <div class="mt-8">
-                    <a href="/jamming-sessions"
+                    <a href="Jamming.html"
                         class="inline-block bg-blue-500 hover-bg-blue-700 text-black font-bold py-2 px-4 rounded">
                         View all jamming sessions
                     </a>
@@ -219,7 +220,48 @@
         </div>
     </footer>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth()
+
+        let timeOut;
+        function resetTimeout() {
+            clearTimeout(timeOut);
+            timeOut = setTimeout(logout, 30000)
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                sessionStorage.removeItem('userAuthenticated')
+                window.location.href = 'login.html'
+            })
+                .catch((error) => {
+                    console.log('Error logging out', error);
+                })
+        }
+
+        document.addEventListener('mousemove', resetTimeout);
+        document.addEventListener('keypress', resetTimeout);
+        document.addEventListener('mousedown', resetTimeout);
+
+        resetTimeout();
+    </script>
+
     <script>
+
         // Burger menus
         document.addEventListener('DOMContentLoaded', function () {
             // open
@@ -281,7 +323,7 @@
             signup.style.display = 'none'
         }
 
-        
+
 
 
         // Sample data from your original objects
@@ -430,7 +472,12 @@
         populateFeatures();
         populateTutorials();
         populateJammingSessions();
+
+        
+
+       
     </script>
+    <!-- <script src="app.js"></script> -->
 </body>
 
 </html>

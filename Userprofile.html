@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div class="sidebar">
+
+    </div>
+    <div class="viewport">
+        <div class="info flex flex-col">
+            <div class="profilephoto rounded-e-full">
+                <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" class="">
+            </div>
+            <div class="profileinfo">
+                <h2>Username</h2>
+                <h2>Email Address</h2>
+                <h2>Description</h2>
+            </div>
+        </div>
+        <div class="post">
+            <input id="videoInput" type="file" accept="video/*" />
+
+
+            <button id="post">post</button>
+
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getDatabase } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
+        import { getStorage, ref } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig)
+        const db = getDatabase(app)
+        const auth = getAuth(app)
+        const storage = getStorage(app)
+
+        let file = {}
+
+        function chooseFile(e){
+            file = e.target.files[0]
+        }
+
+        const post = document.getElementById("post")
+
+        post.addEventListener('click', (e) => {
+            e.preventDefault()
+            uploadFile()
+        })
+        function uploadFile(){
+            ref(storage, 'videos/' + file.name).put(file)
+            // const uploadTask = storageRef.put(file)
+            storageRef
+            .then(snapshot => {
+                console.log(snapshot)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            storageRef
+            .on('state_changed', (snapshot) => {
+                console.log(snapshot)
+            }, (error) => {
+                console.log(error)
+            }, () => {
+                console.log('complete')
+            })
+            storageRef
+            .getDownloadURL()
+
+
+            .then(
+                function (){
+                    console.log("uploaded")
+                }
+            )
+            .catch(error => {
+                console.log(error)
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

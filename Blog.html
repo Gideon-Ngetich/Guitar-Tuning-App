@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Website</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="bg-gray-900 text-white py-4 px-6">
+    <h1 class="text-2xl">Blog Website</h1>
+  </header>
+
+  <main class="container mx-auto p-6">
+    <div class="mb-8">
+      <h2 class="text-2xl">Blog Page</h2>
+      <div id="blogList"></div>
+    </div>
+
+    <div>
+      <h2 class="text-2xl">User Dashboard</h2>
+      <form id="blogForm" class="mt-4">
+        <input type="text" id="titleInput" placeholder="Title" required class="block w-full px-4 py-2 rounded-lg mb-2">
+        <textarea id="contentInput" placeholder="Content" required class="block w-full px-4 py-2 rounded-lg mb-2"></textarea>
+        <button type="submit" class="bg-gray-900 text-white px-4 py-2 rounded-lg">Publish</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="firebase-config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

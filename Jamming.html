@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Upload Video</title>
+    <!-- Firebase JavaScript SDK -->
+
+</head>
+
+<body>
+    <h1>Video Upload</h1>
+    <input type="file" id="file-input" accept="video/*">
+    <button id="upload-button">Upload</button>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+
+        // File upload function
+        async function uploadVideo(file) {
+            try {
+                const storageRef = ref(storage, 'videos/' + file.name);
+                await uploadBytes(storageRef, file);
+                console.log('Video uploaded successfully!');
+            } catch (error) {
+                console.error('Error uploading video:', error);
+            }
+        }
+
+        // Example usage
+        const fileInput = document.getElementById('file-input');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+        });
+
+        const uploadButton = document.getElementById('upload-button');
+
+        uploadButton.addEventListener('click', () => {
+            const file = fileInput.files[0];
+            if (file) {
+                uploadVideo(file);
+            } else {
+                console.log('No file selected.');
+            }
+        });
+
+    </script>
+</body>
+
+</html>
