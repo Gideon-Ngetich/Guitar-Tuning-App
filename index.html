@@ -220,6 +220,7 @@
         </div>
     </footer>
 
+    
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
@@ -240,7 +241,7 @@
         let timeOut;
         function resetTimeout() {
             clearTimeout(timeOut);
-            timeOut = setTimeout(logout, 30000)
+            timeOut = setTimeout(logout, 60000)
         }
 
         function logout() {
@@ -259,7 +260,7 @@
 
         resetTimeout();
     </script>
-
+     <!-- <script src="app.js"></script> -->
     <script>
 
         // Burger menus
@@ -477,7 +478,7 @@
 
        
     </script>
-    <!-- <script src="app.js"></script> -->
+   
 </body>
 
 </html>

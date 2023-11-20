@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="video-container">
+
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+        import { getDatabase, set, ref as databaseRef } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        const auth = getAuth(app)
+        const db = getDatabase(app)
+
+        const user = auth.currentUser
+
+        if (user) {
+
+
+            function displayVideos() {
+                const userId = user.uid; // Assuming 'user' contains the authenticated user information
+
+                // Reference to the 'videos' node under the user's UID
+                const videosRef = ref(db, `Users/${userId}/videos`);
+
+                // Listen for changes in the 'videos' node to fetch and display videos
+                onValue(videosRef, (snapshot) => {
+                    const videosContainer = document.getElementById('videos-container');
+                    videosContainer.innerHTML = ''; // Clear the container before adding new videos
+
+                    snapshot.forEach((videoSnapshot) => {
+                        const videoData = videoSnapshot.val();
+                        // Create HTML elements to display the video
+                        const videoElement = document.createElement('video');
+                        videoElement.src = videoData.url;
+                        videoElement.controls = true; // Show video controls (play, pause, etc.)
+                        videoElement.style.margin = '10px'; // Add some styling
+                        videosContainer.appendChild(videoElement);
+                    });
+                });
+            }
+
+            displayVideos();
+
+        }else{
+            console.log('no user')
+        
+        }
+            // Call the function to display videos when the page loads or when a new video is uploaded
+            
+    </script>
+</body>
+
+</html>

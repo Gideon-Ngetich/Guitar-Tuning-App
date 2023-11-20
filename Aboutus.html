@@ -291,7 +291,29 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        let timeOut;
+        function resetTimeout() {
+            clearTimeout(timeOut);
+            timeOut = setTimeout(logout, 60000)
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                sessionStorage.removeItem('userAuthenticated')
+                window.location.href = 'login.html'
+            })
+                .catch((error) => {
+                    console.log('Error logging out', error);
+                })
+        }
+
+        document.addEventListener('mousemove', resetTimeout);
+        document.addEventListener('keypress', resetTimeout);
+        document.addEventListener('mousedown', resetTimeout);
+
+        resetTimeout();
+    </script>
 
 </body>
 

@@ -56,7 +56,7 @@ const navbarCta = document.querySelector('#navbar-cta');
 // let timeOut;
 // function resetTimeout() {
 //     clearTimeout(timeOut);
-//     timeOut = setTimeout(logout, 3000)
+//     timeOut = setTimeout(logout, 10000)
 // }
 
 // function logout() {

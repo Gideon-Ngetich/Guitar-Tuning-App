@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Tunner | AjayTuner</title>
 </head>
 
@@ -125,7 +125,8 @@
 
     <div class="tunner-container relative h-screen">
         <!-- Video -->
-        <video src="Images/Backgroundvideo.mp4" autoplay loop muted class="absolute inset-0 w-full h-full object-cover z-0"></video>
+        <video src="Images/Backgroundvideo.mp4" autoplay loop muted
+            class="absolute inset-0 w-full h-full object-cover z-0"></video>
 
         <!-- Canvas container -->
         <div class="canvas-container absolute inset-0 flex items-center justify-center z-10">
@@ -192,6 +193,28 @@
 
         // Render the guitar tuner on the canvas by running the function
         initializeTuners();
+
+        let timeOut;
+        function resetTimeout() {
+            clearTimeout(timeOut);
+            timeOut = setTimeout(logout, 60000)
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                sessionStorage.removeItem('userAuthenticated')
+                window.location.href = 'login.html'
+            })
+                .catch((error) => {
+                    console.log('Error logging out', error);
+                })
+        }
+
+        document.addEventListener('mousemove', resetTimeout);
+        document.addEventListener('keypress', resetTimeout);
+        document.addEventListener('mousedown', resetTimeout);
+
+        resetTimeout();
     </script>
 </body>
 
