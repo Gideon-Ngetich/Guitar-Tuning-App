@@ -5,72 +5,67 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            background-color: red;
+        }
+
+        #loading-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: 9999;
+        }
+
+        .spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 4px solid #333;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div class="video-container">
-
+    <div id="loading-page">
+        <div class="spinner"></div>
     </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-        import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-        import { getDatabase, set, ref as databaseRef } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
-        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
-            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
-            projectId: "guitar-tunner-9bd54",
-            storageBucket: "guitar-tunner-9bd54.appspot.com",
-            messagingSenderId: "534214805325",
-            appId: "1:534214805325:web:8941f0e10a240d5d085904",
-            measurementId: "G-4F13BLVGNM"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const storage = getStorage(app);
-        const auth = getAuth(app)
-        const db = getDatabase(app)
-
-        const user = auth.currentUser
-
-        if (user) {
-
-
-            function displayVideos() {
-                const userId = user.uid; // Assuming 'user' contains the authenticated user information
-
-                // Reference to the 'videos' node under the user's UID
-                const videosRef = ref(db, `Users/${userId}/videos`);
-
-                // Listen for changes in the 'videos' node to fetch and display videos
-                onValue(videosRef, (snapshot) => {
-                    const videosContainer = document.getElementById('videos-container');
-                    videosContainer.innerHTML = ''; // Clear the container before adding new videos
-
-                    snapshot.forEach((videoSnapshot) => {
-                        const videoData = videoSnapshot.val();
-                        // Create HTML elements to display the video
-                        const videoElement = document.createElement('video');
-                        videoElement.src = videoData.url;
-                        videoElement.controls = true; // Show video controls (play, pause, etc.)
-                        videoElement.style.margin = '10px'; // Add some styling
-                        videosContainer.appendChild(videoElement);
-                    });
-                });
-            }
-
-            displayVideos();
-
-        }else{
-            console.log('no user')
-        
-        }
-            // Call the function to display videos when the page loads or when a new video is uploaded
-            
-    </script>
+    <div>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias possimus architecto facilis non, obcaecati
+        porro maiores earum, voluptates eligendi, cupiditate laborum! Voluptate perspiciatis distinctio placeat,
+        inventore voluptatum alias qui dolorem quas officia culpa magni tempora maxime, reiciendis ab, officiis
+        praesentium vitae ipsa eum deleniti accusamus. Consequatur perferendis ea harum illo fuga? Error ea vitae
+        debitis? Architecto quasi distinctio dolorum nesciunt, dicta perspiciatis quisquam, ducimus accusamus deserunt
+        repellat veritatis debitis ratione quidem eligendi inventore tempore nisi. Modi doloremque repellendus possimus
+        amet mollitia adipisci consectetur harum maxime placeat, veritatis cumque, at dolorum. Reprehenderit accusantium
+        dolores illo alias animi nihil iure, aliquid eaque doloremque odit in reiciendis culpa incidunt autem illum
+        delectus architecto neque voluptates fugit magnam eum fuga! Ratione nisi libero quae molestias illo commodi
+        quidem odit praesentium, repellendus suscipit incidunt iusto nihil architecto ipsum non ut possimus minima,
+        similique expedita? In impedit et praesentium, facere cupiditate porro neque placeat officiis quis labore. Illo
+        voluptatum, cumque mollitia molestiae ad minus pariatur sed. Maxime fugit perspiciatis temporibus incidunt
+        voluptatibus asperiores blanditiis quisquam delectus? Quos nobis repudiandae provident! Quisquam, perspiciatis!
+        In voluptates minima necessitatibus odio autem molestiae id iusto? Excepturi natus, placeat adipisci ab
+        consectetur eveniet ipsum impedit rem, dignissimos nulla quidem! Totam, mollitia?
+    </div>
 </body>
 
 </html>

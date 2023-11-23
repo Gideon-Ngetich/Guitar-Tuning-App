@@ -8,6 +8,9 @@ if (userAuthenticated === 'true') {
     signinRes.style.display = 'none'
     signin.style.display = 'none'
     signup.style.display = 'none'
+
+
+
 }
 
 // Burger menus
@@ -53,24 +56,17 @@ document.addEventListener('DOMContentLoaded', function () {
 const toggleButton = document.querySelector('[data-collapse-toggle="navbar-cta"]');
 const navbarCta = document.querySelector('#navbar-cta');
 
-// let timeOut;
-// function resetTimeout() {
-//     clearTimeout(timeOut);
-//     timeOut = setTimeout(logout, 10000)
-// }
+function generateCustomId(length = 8) {
+    const alphanumeric = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let customId = '';
 
-// function logout() {
-//     auth.signOut().then(() => {
-//         sessionStorage.removeItem('userAuthenticated')
-//         window.location.href = 'login.html'
-//     })
-//         .catch((error) => {
-//             console.log('Error logging out', error);
-//         })
-// }
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * alphanumeric.length);
+        customId += alphanumeric.charAt(randomIndex);
+    }
 
-// document.addEventListener('mousemove', resetTimeout);
-// document.addEventListener('keypress', resetTimeout);
-// document.addEventListener('mousedown', resetTimeout);
+    return customId;
+}
 
-// resetTimeout();
+
+

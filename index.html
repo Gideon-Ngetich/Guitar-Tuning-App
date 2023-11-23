@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
     <title>AjayTuner</title>
 </head>
@@ -17,14 +18,23 @@
 			</svg> -->
             AjayTuner
         </a>
-        <div class="lg:hidden">
-            <button class="navbar-burger flex items-center text-blue-600 p-3">
+        <div class="flex">
+            <button class="navbar-burger flex items-center text-blue-600 p-3 lg:hidden">
                 <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <title>Mobile menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
             </button>
+            <div class="hidden lg:inline-block">
+                <a href="Userprofile.html" id="navimgelementLink" class="lg:inline-block md:hidden">
+                    <div id="navuserImgDiv" class="user-img w-14 h-14 rounded-full lg:inline-block md:hidden">
+                        <img id="Navuserimg" class="Navuserimg rounded-full w-14 h-14 " src="" alt="">
+                    </div>
+                </a>
+            </div>
+            
         </div>
+
         <ul
             class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
             <li><a class="text-sm text-blue-600 font-bold hover:text-gray-500" href="/">Home</a></li>
@@ -59,12 +69,13 @@
                         d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                 </svg>
             </li>
-            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Shop.html">Shop</a></li>
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Jamming.html">Jamming</a></li>
         </ul>
         <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
             id="signin-res" href="login.html">Sign In</a>
         <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
             id="signup-res" href="signup.html">Sign up</a>
+        
     </nav>
     <div class="navbar-menu relative z-50 hidden">
         <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -86,6 +97,12 @@
                 </button>
             </div>
             <div>
+
+                <a href="Userprofile.html" id="navimgelementResLink" class=" lg:flex">
+                    <div id="navprofileImgDiv" class="user-img w-14 h-14 rounded-full ">
+                        <img id="NavuserimgRes" class="Navuserimg rounded-full w-14 h-14" src="" alt="">
+                    </div>
+                </a>
                 <ul>
                     <li class="mb-1">
                         <a class="block p-4 text-sm font-semibold text-blue-500 hover:bg-blue-50 hover:text-blue-600 rounded"
@@ -105,7 +122,7 @@
                     </li>
                     <li class="mb-1">
                         <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
-                            href="Shop.html">Shop</a>
+                            href="Jamming.html">Jamming</a>
                     </li>
                 </ul>
             </div>
@@ -123,12 +140,12 @@
         </nav>
     </div>
 
-    <div class="bg-image bg-cover bg-opacity-50 bg-center sm:bg-contain md:bg-cover">
+    <div class="bg-image bg-cover bg-no-repeat bg-opacity-50 bg-center sm:bg-contain md:bg-cover">
         <div class="max-w-screen-xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h2 class="text-2xl font-semibold text-blue-600 tracking-wide uppercase">AjayTuner</h2>
+                <h2 class="text-2xl font-semibold text-blue-400 tracking-wide uppercase">AjayTuner</h2>
                 <p
-                    class="mt-1 text-4xl font-extrabold text-black-900 dark:text-yellow-600 sm:text-5xl sm:tracking-tight lg:text-6xl">
+                    class="mt-1 text-4xl font-extrabold text-yellow-400 dark:text-yellow-600 sm:text-5xl sm:tracking-tight lg:text-6xl">
                     Tune your guitar</p>
                 <p class="max-w-xl mt-5 mx-auto text-2xl text-white dark:text-white">AjayTuner is a web app that helps
                     you tune your guitar. It uses the microphone of your device to detect the frequency of the string
@@ -165,7 +182,7 @@
                 <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8" id="tutorials-container">
                     <!-- Tutorial items will be generated here -->
                 </div>
-                <div class="mt-8">
+                <div class="mt-8 hidden">
                     <a href="/tutorials"
                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                         View all tutorials
@@ -220,10 +237,13 @@
         </div>
     </footer>
 
-    
+
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+        import { onValue, getDatabase, set, ref as databaseRef } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+
 
         const firebaseConfig = {
             apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
@@ -235,13 +255,49 @@
             measurementId: "G-4F13BLVGNM"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth()
+        const storage = getStorage(app);
+        const auth = getAuth(app)
+        const db = getDatabase(app)
+
+
+        function displayUserImg() {
+            const user = auth.currentUser
+
+            if (user) {
+                const userId = user.uid
+
+                const profileRef = databaseRef(db, `Users/${userId}/ProfileImg`);
+                const NavuserImgElement = document.getElementById('Navuserimg');
+                const NavuserImgResElement = document.getElementById('NavuserimgRes')
+                onValue(profileRef, (snapshot) => {
+                    const profileImg = snapshot.val();
+                    if (profileImg && profileImg.profileImgUrl) {
+                        NavuserImgElement.src = profileImg.profileImgUrl
+                        NavuserImgResElement.src = profileImg.profileImgUrl
+                    } else {
+                        NavuserImgElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                        NavuserImgResElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                    }
+                })
+            }
+        }
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // Call fetchAndDisplayVideos when the user is logged in
+                displayUserImg()
+            } else {
+                console.log('User not logged in');
+            }
+        });
+
 
         let timeOut;
         function resetTimeout() {
             clearTimeout(timeOut);
-            timeOut = setTimeout(logout, 60000)
+            timeOut = setTimeout(logout, 600000)
         }
 
         function logout() {
@@ -260,7 +316,8 @@
 
         resetTimeout();
     </script>
-     <!-- <script src="app.js"></script> -->
+    <!-- <script src="app.js"></script> -->
+    <!-- <script src="script.js"></script> -->
     <script>
 
         // Burger menus
@@ -318,10 +375,15 @@
             const signin = document.getElementById('signin')
             const signupRes = document.getElementById('signup-res');
             const signinRes = document.getElementById('signin-res')
+            const Navuserimg = document.getElementById('Navuserimg')
+            const NavuserimgRes = document.getElementById('NavuserimgRes')
+
             signupRes.style.display = 'none'
             signinRes.style.display = 'none'
             signin.style.display = 'none'
             signup.style.display = 'none'
+            Navuserimg.style.display = 'flex'
+            NavuserimgRes.style.display = 'flex'
         }
 
 
@@ -348,17 +410,17 @@
             {
                 title: 'Getting started with AjayTuner',
                 description: 'Learn how to use AjayTuner to tune your guitar in this beginner-friendly tutorial.',
-                url: 'https://www.youtube.com/watch?v=abc123',
+                // url: 'https://www.youtube.com/watch?v=abc123',
             },
             {
                 title: 'Advanced tuning techniques',
                 description: 'Take your tuning skills to the next level with these advanced techniques and tips.',
-                url: 'https://www.youtube.com/watch?v=def456',
+                // url: 'https://www.youtube.com/watch?v=def456',
             },
             {
                 title: 'Troubleshooting common tuning problems',
                 description: 'Learn how to troubleshoot common tuning problems and get your guitar sounding great.',
-                url: 'https://www.youtube.com/watch?v=ghi789',
+                // url: 'https://www.youtube.com/watch?v=ghi789',
             },
             // Add other tutorial objects here
         ];
@@ -367,17 +429,17 @@
             {
                 title: 'Jamming with the band',
                 description: 'Watch this video of our band jamming together and get inspired to create your own music.',
-                url: 'https://www.youtube.com/watch?v=abc123',
+                // url: 'https://www.youtube.com/watch?v=abc123',
             },
             {
                 title: 'Improvisation techniques',
                 description: 'Learn how to improvise on your instrument with these tips and tricks from our expert musicians.',
-                url: 'https://www.youtube.com/watch?v=def456',
+                // url: 'https://www.youtube.com/watch?v=def456',
             },
             {
                 title: 'Collaborating with other musicians',
                 description: 'Discover the joys of collaborating with other musicians and learn how to make beautiful music together.',
-                url: 'https://www.youtube.com/watch?v=ghi789',
+                // url: 'https://www.youtube.com/watch?v=ghi789',
             },
             // Add other jamming session objects here
         ];
@@ -474,11 +536,11 @@
         populateTutorials();
         populateJammingSessions();
 
-        
 
-       
+
+
     </script>
-   
+
 </body>
 
 </html>

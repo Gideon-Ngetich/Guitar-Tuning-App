@@ -17,17 +17,25 @@
 			</svg> -->
             AjayTuner
         </a>
-        <div class="lg:hidden">
-            <button class="navbar-burger flex items-center text-blue-600 p-3">
+        <div class="flex">
+            <button class="navbar-burger flex items-center text-blue-600 p-3 lg:hidden">
                 <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <title>Mobile menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
             </button>
+            <div class="hidden lg:inline-block">
+                <a href="Userprofile.html" id="navimgelementLink" class="lg:inline-block md:hidden">
+                    <div id="navuserImgDiv" class="user-img w-14 h-14 rounded-full lg:inline-block md:hidden">
+                        <img id="Navuserimg" class="Navuserimg rounded-full w-14 h-14 " src="" alt="">
+                    </div>
+                </a>
+            </div>
+
         </div>
         <ul
             class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
-            <li><a class="text-sm text-blue-600 font-bold hover:text-gray-500" href="/">Home</a></li>
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="/">Home</a></li>
             <li class="text-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
                     viewBox="0 0 24 24">
@@ -43,7 +51,7 @@
                         d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                 </svg>
             </li>
-            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Tunner.html">Tuner</a></li>
+            <li><a class="text-sm text-blue-500 font-bold hover:text-gray-500" href="Tunner.html">Tuner</a></li>
             <li class="text-gray-300">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
                     viewBox="0 0 24 24">
@@ -59,12 +67,13 @@
                         d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                 </svg>
             </li>
-            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Shop.html">Shop</a></li>
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Jamming.html">Jamming</a></li>
         </ul>
         <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
             id="signin-res" href="login.html">Sign In</a>
         <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
             id="signup-res" href="signup.html">Sign up</a>
+
     </nav>
     <div class="navbar-menu relative z-50 hidden">
         <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
@@ -86,6 +95,12 @@
                 </button>
             </div>
             <div>
+
+                <a href="Userprofile.html" id="navimgelementResLink" class=" lg:flex">
+                    <div id="navprofileImgDiv" class="user-img w-14 h-14 rounded-full ">
+                        <img id="NavuserimgRes" class="Navuserimg rounded-full w-14 h-14" src="" alt="">
+                    </div>
+                </a>
                 <ul>
                     <li class="mb-1">
                         <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
@@ -105,7 +120,7 @@
                     </li>
                     <li class="mb-1">
                         <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
-                            href="Shop.html">Shop</a>
+                            href="Jamming.html">Jamming</a>
                     </li>
                 </ul>
             </div>
@@ -123,7 +138,11 @@
         </nav>
     </div>
 
-    <div class="tunner-container relative h-screen">
+    <div id="loading-page">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="tunner-container relative h-screen ">
         <!-- Video -->
         <video src="Images/Backgroundvideo.mp4" autoplay loop muted
             class="absolute inset-0 w-full h-full object-cover z-0"></video>
@@ -140,7 +159,59 @@
     <script src="https://cdn.rawgit.com/citronneur/onlinetuner.co/master/js/onlinetuner.min.js"></script>
     <script src="app.js"></script>
     <script src="onlinetunner.min.js"></script>
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+        import { onValue, getDatabase, set, ref as databaseRef } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        const auth = getAuth(app)
+        const db = getDatabase(app)
+
+        function displayUserImg() {
+            const user = auth.currentUser
+
+            if (user) {
+                const userId = user.uid
+
+                const profileRef = databaseRef(db, `Users/${userId}/ProfileImg`);
+                const NavuserImgElement = document.getElementById('Navuserimg');
+                const NavuserImgResElement = document.getElementById('NavuserimgRes')
+                onValue(profileRef, (snapshot) => {
+                    const profileImg = snapshot.val();
+                    if (profileImg && profileImg.profileImgUrl) {
+                        NavuserImgElement.src = profileImg.profileImgUrl
+                        NavuserImgResElement.src = profileImg.profileImgUrl
+                    } else {
+                        NavuserImgElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                        NavuserImgResElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                    }
+                })
+            }
+        }
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // Call fetchAndDisplayVideos when the user is logged in
+                displayUserImg()
+            } else {
+                console.log('User not logged in');
+            }
+        });
         var Settings = {
             container: document.getElementById("guitar-tuner"),
             backgroundColor: 'black', // or hex colors "#ffffff"
@@ -157,8 +228,49 @@
         //     fontColor: "black"
         // };
 
+        // function initializeTuners() {
+        //     const loading-page = document.getElementById('loading-page');
+        //     // Create a single or multiple instance of tuners at time
+        //     var tuners = [
+        //         // First tuner
+        //         new OnlineTuner.Controller.GuitareTuner(
+        //             new OnlineTuner.Widget.CircleWidget(
+        //                 Settings.container,
+        //                 Settings.backgroundColor,
+        //                 Settings.notOkayColor,
+        //                 Settings.okayColor,
+        //                 Settings.fontColor
+        //             )
+        //         ),
+        //         // Second Tuner
+        //         // new OnlineTuner.Controller.GuitareTuner(
+        //         //     new OnlineTuner.Widget.CircleWidget(
+        //         //         SettingsSecondTuner.container,
+        //         //         SettingsSecondTuner.backgroundColor,
+        //         //         SettingsSecondTuner.notOkayColor,
+        //         //         SettingsSecondTuner.okayColor,
+        //         //         SettingsSecondTuner.fontColor
+        //         //     )
+        //         // )
+        //     ];
+
+        //     // Initialize the tuner with the callbacks
+        //     new OnlineTuner.Analyser(tuners).install(function () {
+        //         console.log("Succesfully initialized");
+
+        //     }, function (errorMessage) {
+        //         console.error("Oops, this shouldn't happen", errorMessage);
+        //     });
+        // }
+
         function initializeTuners() {
-            // Create a single or multiple instance of tuners at time
+            // const tunnerContainer = document.querySelector('.tunner-container');
+            const loadingPage = document.getElementById('loading-page');
+            
+            // Show the loading page
+            loadingPage.style.display = 'block';
+
+            // Create a single or multiple instance of tuners at a time
             var tuners = [
                 // First tuner
                 new OnlineTuner.Controller.GuitareTuner(
@@ -170,22 +282,15 @@
                         Settings.fontColor
                     )
                 ),
-                // Second Tuner
-                // new OnlineTuner.Controller.GuitareTuner(
-                //     new OnlineTuner.Widget.CircleWidget(
-                //         SettingsSecondTuner.container,
-                //         SettingsSecondTuner.backgroundColor,
-                //         SettingsSecondTuner.notOkayColor,
-                //         SettingsSecondTuner.okayColor,
-                //         SettingsSecondTuner.fontColor
-                //     )
-                // )
+                // Additional tuners can be added here
             ];
 
             // Initialize the tuner with the callbacks
             new OnlineTuner.Analyser(tuners).install(function () {
-                console.log("Succesfully initialized");
-
+                // Hide the loading page once the tuner is successfully initialized
+                loadingPage.style.display = 'none';
+                // tunnerContainer.classList.remove('hidden');/
+                console.log("Successfully initialized");
             }, function (errorMessage) {
                 console.error("Oops, this shouldn't happen", errorMessage);
             });
@@ -197,7 +302,7 @@
         let timeOut;
         function resetTimeout() {
             clearTimeout(timeOut);
-            timeOut = setTimeout(logout, 60000)
+            timeOut = setTimeout(logout, 600000)
         }
 
         function logout() {
@@ -215,6 +320,23 @@
         document.addEventListener('mousedown', resetTimeout);
 
         resetTimeout();
+
+        const userAuthtenticated = sessionStorage.getItem('userAuthenticated');
+        if (userAuthtenticated === 'true') {
+            const signup = document.getElementById('signup');
+            const signin = document.getElementById('signin')
+            const signupRes = document.getElementById('signup-res');
+            const signinRes = document.getElementById('signin-res')
+            const Navuserimg = document.getElementById('Navuserimg');
+            const NavuserimgRes = document.getElementById('NavuserimgRes');
+
+            signupRes.style.display = 'none'
+            signinRes.style.display = 'none'
+            signin.style.display = 'none'
+            signup.style.display = 'none'
+            Navuserimg.style.display = 'flex'
+            NavuserimgRes.style.display = 'flex'
+        }
     </script>
 </body>
 

@@ -4,17 +4,244 @@
 <head>
     <title>Upload Video</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Firebase JavaScript SDK -->
 
 </head>
 
 <body>
-    <h1>Video Upload</h1>
-    <input type="file" id="file-input" accept="video/*">
-    <button id="upload-button">Upload</button>
+    <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
+        <a class="text-3xl font-bold leading-none" href="#">
+            <!-- <svg class="h-10" alt="logo" viewBox="0 0 100 100">
+				<path d="M100 34.2c-.4-2.6-3.3-4-5.3-5.3-3.6-2.4-7.1-4.7-10.7-7.1-8.5-5.7-17.1-11.4-25.6-17.1-2-1.3-4-2.7-6-4-1.4-1-3.3-1-4.8 0-5.7 3.8-11.5 7.7-17.2 11.5L5.2 29C3 30.4.1 31.8 0 34.8c-.1 3.3 0 6.7 0 10v16c0 2.9-.6 6.3 2.1 8.1 6.4 4.4 12.9 8.6 19.4 12.9 8 5.3 16 10.7 24 16 2.2 1.5 4.4 3.1 7.1 1.3 2.3-1.5 4.5-3 6.8-4.5 8.9-5.9 17.8-11.9 26.7-17.8l9.9-6.6c.6-.4 1.3-.8 1.9-1.3 1.4-1 2-2.4 2-4.1V37.3c.1-1.1.2-2.1.1-3.1 0-.1 0 .2 0 0zM54.3 12.3L88 34.8 73 44.9 54.3 32.4V12.3zm-8.6 0v20L27.1 44.8 12 34.8l33.7-22.5zM8.6 42.8L19.3 50 8.6 57.2V42.8zm37.1 44.9L12 65.2l15-10.1 18.6 12.5v20.1zM50 60.2L34.8 50 50 39.8 65.2 50 50 60.2zm4.3 27.5v-20l18.6-12.5 15 10.1-33.6 22.4zm37.1-30.5L80.7 50l10.8-7.2-.1 14.4z"></path>
+			</svg> -->
+            AjayTuner
+        </a>
+        <div class="flex">
+            <button class="navbar-burger flex items-center text-blue-600 p-3 lg:hidden">
+                <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Mobile menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+                </svg>
+            </button>
+            <div class="hidden lg:inline-block">
+                <a href="Userprofile.html" id="navimgelementLink" class="lg:inline-block md:hidden">
+                    <div id="navuserImgDiv" class="user-img w-14 h-14 rounded-full lg:inline-block md:hidden">
+                        <img id="Navuserimg" class="Navuserimg rounded-full w-14 h-14 " src="" alt="">
+                    </div>
+                </a>
+            </div>
 
-    <div id="video-container" class="video-container flex flex-col w-72 h-72 gap-5"></div>
+        </div>
+        <ul
+            class="hidden absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:flex lg:mx-auto lg:items-center lg:w-auto lg:space-x-6">
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="/">Home</a></li>
+            <li class="text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </li>
+            <li><a class="text-sm text-black font-bold" href="Aboutus.html">About Us</a></li>
+            <li class="text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </li>
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Tunner.html">Tuner</a></li>
+            <li class="text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </li>
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Blog.html">Blog</a></li>
+            <li class="text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" class="w-4 h-4 current-fill"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 5v0m0 7v0m0 7v0m0-13a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                </svg>
+            </li>
+            <li><a class="text-sm text-black font-bold hover:text-gray-500" href="Jamming.html">Jamming</a></li>
+        </ul>
+        <a class="hidden lg:inline-block lg:ml-auto lg:mr-3 py-2 px-6 bg-gray-50 hover:bg-gray-100 text-sm text-gray-900 font-bold  rounded-xl transition duration-200"
+            id="signin-res" href="login.html">Sign In</a>
+        <a class="hidden lg:inline-block py-2 px-6 bg-blue-500 hover:bg-blue-600 text-sm text-white font-bold rounded-xl transition duration-200"
+            id="signup-res" href="signup.html">Sign up</a>
+
+    </nav>
+    <div class="navbar-menu relative z-50 hidden">
+        <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
+        <nav
+            class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
+            <div class="flex items-center mb-8">
+                <a class="mr-auto text-3xl font-bold leading-none" href="#">
+                    <!-- <svg class="h-12" alt="logo" viewBox="0 0 100 100">
+						<path d="M100 34.2c-.4-2.6-3.3-4-5.3-5.3-3.6-2.4-7.1-4.7-10.7-7.1-8.5-5.7-17.1-11.4-25.6-17.1-2-1.3-4-2.7-6-4-1.4-1-3.3-1-4.8 0-5.7 3.8-11.5 7.7-17.2 11.5L5.2 29C3 30.4.1 31.8 0 34.8c-.1 3.3 0 6.7 0 10v16c0 2.9-.6 6.3 2.1 8.1 6.4 4.4 12.9 8.6 19.4 12.9 8 5.3 16 10.7 24 16 2.2 1.5 4.4 3.1 7.1 1.3 2.3-1.5 4.5-3 6.8-4.5 8.9-5.9 17.8-11.9 26.7-17.8l9.9-6.6c.6-.4 1.3-.8 1.9-1.3 1.4-1 2-2.4 2-4.1V37.3c.1-1.1.2-2.1.1-3.1 0-.1 0 .2 0 0zM54.3 12.3L88 34.8 73 44.9 54.3 32.4V12.3zm-8.6 0v20L27.1 44.8 12 34.8l33.7-22.5zM8.6 42.8L19.3 50 8.6 57.2V42.8zm37.1 44.9L12 65.2l15-10.1 18.6 12.5v20.1zM50 60.2L34.8 50 50 39.8 65.2 50 50 60.2zm4.3 27.5v-20l18.6-12.5 15 10.1-33.6 22.4zm37.1-30.5L80.7 50l10.8-7.2-.1 14.4z"></path>
+					</svg> -->
+                    AjayTuner
+                </a>
+                <button class="navbar-close">
+                    <svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+            <div>
+
+                <a href="Userprofile.html" id="navimgelementResLink" class=" lg:flex">
+                    <div id="navprofileImgDiv" class="user-img w-14 h-14 rounded-full ">
+                        <img id="NavuserimgRes" class="Navuserimg rounded-full w-14 h-14" src="" alt="">
+                    </div>
+                </a>
+                <ul>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="index.html">Home</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="Aboutus.html">About Us</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="Tunner.html">Tuner</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="Blog.html">Blog</a>
+                    </li>
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                            href="Jamming.html">Jamming</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-auto">
+                <div class="pt-6">
+                    <a class="block px-4 py-3 mb-3 leading-loose text-xs text-center font-semibold bg-gray-50 hover:bg-gray-100 rounded-xl"
+                        id="signin" href="login.html">Sign in</a>
+                    <a class="block px-4 py-3 mb-2 leading-loose text-xs text-center text-white font-semibold bg-blue-600 hover:bg-blue-700  rounded-xl"
+                        id="signup" href="signup.html">Sign Up</a>
+                </div>
+                <p class="my-4 text-xs text-center text-gray-400">
+                    <span>Copyright © 2023</span>
+                </p>
+            </div>
+        </nav>
+    </div>
+
+    <div id="loading-page">
+        <div class="spinner"></div>
+    </div>
+
+
+    <div class="flex w-full justify-start px-20 items-center bg-blue-900 h-5 md:h-24">
+        <h1 class="text-xl md:text-3xl font-bold text-white">User Dashboard</h1>
+        
+    </div>
+    <!-- <div class="container">
+        <div class="profile w-full flex flex-row gap-5 justify-center items-center">
+            <div class="flex justify-center items-center profile-image h-1/2 bg-red-600 rounded-full">
+                <img class="avator w-72 rounded-full" src="./Images/guitar-strings-music-blur-wallpaper-preview.jpg"
+                    alt="">
+            </div>
+            <div class="user-info flex flex-col w-1/2 justify-center items-center">
+                <div class="header w-full flex justify-center items-center">
+                    <h1 class="text-2xl font-bold">User Info</h1>
+                </div>
+                <div class="info flex justify-center items-center">
+                    <label class="px-3 font-bold text-2xl" for="firstname">Firstname: </label>
+                    <p id="firstname" class="text-2xl">Mike</p>
+                </div>
+                <div class="info flex justify-center items-center">
+                    <label class="px-3 font-bold text-2xl" for="lastname">Lastname: </label>
+                    <p id="lastname"  class="text-2xl">Praise</p>
+                </div>
+
+                <div class="info flex justify-center items-center">
+                    <label class="px-3 font-bold text-2xl" for="email">Email: </label>
+                    <p id="email" class="text-2xl">mike@test.com</p>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="upload-section">
+            <input type="file" id="file-input" accept="video/*">
+            <button id="upload-button">Upload</button>
+        </div>
+        <div id="video-container" class="video-container flex flex-col w-72 h-72 gap-5"></div>
+    </div> -->
+
+    <div class="mx-auto">
+        <!-- User Avatar -->
+        <div class="flex flex-col items-center justify-center m-8">
+            <img id="userImg"
+                src="https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047"
+                alt="User Avatar" class="w-52 h-52 rounded-full">
+
+            <div class="uploadProfile mt-5">
+                <input type="file" name="profileImg" id="profileImg" accept="image/*">
+                <button id="profileImgBtn"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded">Change Profile</button>
+            </div>
+        </div>
+
+        <!-- User Information -->
+
+        <div class="flex flex-col justify-center px-10 mb-8 h-64 w-full bg-blue-100">
+            <h2 class="text-2xl text-black font-bold mb-2 pb-7">User Information</h2>
+            <div class="info flex">
+                <label class="px-3 font-bold text-2xl" for="firstname">Firstname: </label>
+                <p id="firstname" class="text-xl"></p>
+            </div>
+            <div class="info flex">
+                <label class="px-3 font-bold text-2xl" for="lastname">Lastname: </label>
+                <p id="lastname" class="text-xl"></p>
+            </div>
+
+            <div class="info flex">
+                <label class="px-3 font-bold text-2xl" for="email">Email: </label>
+                <p id="email" class="text-xl"></p>
+            </div>
+            <div class="m-5">
+                <button id="logOutBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 w-40 rounded">Log Out</button>
+            </div>
+
+        </div>
+
+        <!-- Upload Section -->
+        <div class="flex flex-col mb-8 px-8">
+            <h2 class="text-2xl font-bold mb-2">Upload New Videos</h2>
+            <input id="file-input" type="file" accept="video/*" class="mb-4">
+            <textarea name="description" id="description" cols="30" rows="10" placeholder="Enter video description"
+                class="outline-black m-3" required></textarea>
+            <div>
+                <button id="upload-button"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded">Upload Video
+                </button>
+                <a href="BlogDesign.html" id="writeblog"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-9 w-40 rounded">Write a Blog</a>
+            </div>
+
+
+        </div>
+
+        <!-- Display Uploaded Videos Section -->
+        <div id="video-container" class="flex flex-col m-10 justify-center items-center">
+            <h2 class="text-2xl font-bold mb-2">My Videos</h2>
+        </div>
+    </div>
+    <script src="app.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
@@ -53,7 +280,111 @@
             return customId;
         }
 
+        const profileImg = document.getElementById('profileImg');
+        // profileImg.addEventListener('change', () => {
+        //     const file = profileImg.files[0];
+        //     if (file) {
+        //         const reader = new FileReader();
+        //         reader.addEventListener('load', () =>{
+        //             const userImg = document.getElementById('userImg');
+        //             userImg.innerHTML = '';
+        //             userImg.src = reader.result;
+        //         reader.readAsDataURL(file)
+
+        //         })
+        //     } else {
+        //         console.log('No file selected.');
+        //     }
+        // });
+
+        // function uploadProfileimg(file) {
+        //     const loadingPage = document.getElementById('loading-page');
+        //     try {
+        //         const user = auth.currentUser
+
+        //         if (user) {
+        //             const userId = user.uid
+        //             console.log(userId)
+
+        //             const storageRef = ref(storage, `ProfileImg/${userId}/${file.name}`);
+        //             uploadBytes(storageRef, file);
+
+        //             const profileImgName = file.name;
+        //             const profileImgUrl = `https://firebasestorage.googleapis.com/v0/b/${storageRef.bucket}/o/${encodeURIComponent(storageRef.fullPath)}?alt=media`;
+
+
+        //             set(databaseRef(db, 'Users/' + user.uid + '/ProfileImg/'), { profileImgUrl })
+
+        //                 .then(() => {
+        //                     console.log('Data set successful')
+        //                 })
+        //                 .catch((error) => {
+        //                     console.log(error)
+        //                 }
+        //                 )
+
+        //             console.log('Profile image uploaded successfully!');
+
+        //         } else {
+        //             console.log('User not logged in')
+        //         }
+        //     } catch (error) {
+        //         console.error('Error uploading profile image:', error);
+        //     }
+        // }
+
+        function uploadProfileimg(file) {
+            const loadingPage = document.getElementById('loading-page');
+
+            loadingPage.style.display = 'block';
+
+            try {
+                const user = auth.currentUser;
+
+                if (user) {
+                    const userId = user.uid;
+                    console.log(userId);
+
+                    const storageRef = ref(storage, `ProfileImg/${userId}/${file.name}`);
+                    uploadBytes(storageRef, file);
+
+                    const profileImgName = file.name;
+                    const profileImgUrl = `https://firebasestorage.googleapis.com/v0/b/${storageRef.bucket}/o/${encodeURIComponent(storageRef.fullPath)}?alt=media`;
+
+                    set(databaseRef(db, 'Users/' + user.uid + '/ProfileImg/'), { profileImgUrl })
+                        .then(() => {
+                            // Hide the loading page once the data is set successfully
+                            loadingPage.style.display = 'none';
+                            console.log('Data set successful');
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                    console.log('Profile image uploaded successfully!');
+                } else {
+                    console.log('User not logged in');
+                }
+            } catch (error) {
+                console.error('Error uploading profile image:', error);
+            }
+        }
+
+        const profileImgBtn = document.getElementById('profileImgBtn');
+        profileImgBtn.addEventListener('click', () => {
+            const file = profileImg.files[0];
+            if (file) {
+                uploadProfileimg(file);
+            } else {
+                console.log('No file selected.');
+            }
+        });
+
+
         async function uploadVideo(file) {
+            const loadingPage = document.getElementById('loading-page');
+
+            loadingPage.style.display = 'block';
             try {
                 const user = auth.currentUser
 
@@ -65,17 +396,22 @@
                     const storageRef = ref(storage, `videos/${userId}/${file.name}`);
                     await uploadBytes(storageRef, file);
 
+                    const description = document.getElementById('description').value
+
                     const videoMetadata = {
                         videoId: videoId,
                         fileName: file.name,
                         url: `https://firebasestorage.googleapis.com/v0/b/${storageRef.bucket}/o/${encodeURIComponent(storageRef.fullPath)}?alt=media`,
                         uploaderId: userId,
+                        description: description
 
                     }
+
 
                     // set(databaseRef(db, 'Users/' + user.uid), { videoMetadata })
                     set(databaseRef(db, 'Users/' + user.uid + '/videos/' + videoMetadata.videoId), { videoMetadata })
                         .then(() => {
+                            loadingPage.style.display = 'none';
                             console.log('Data set successful')
                         })
                         .catch((error) => {
@@ -89,6 +425,7 @@
                     console.log('User not logged in')
                 }
 
+                decription.value = '';
 
 
             } catch (error) {
@@ -98,6 +435,10 @@
 
         function fetchAndDisplayVideos() {
             const user = auth.currentUser;
+            const videoContainer = document.getElementById('video-container');
+            const loadingPage = document.getElementById('loading-page');
+
+            loadingPage.style.display = 'block';
 
             if (user) {
                 const userId = user.uid;
@@ -106,9 +447,41 @@
                 const userRef = databaseRef(db, `Users/${userId}/userData`);
                 onValue(userRef, (snapshot) => {
                     const userData = snapshot.val();
-                    const userName = userData.firstName;
+                    const firstName = userData.firstName;
+                    const lastName = userData.lastName;
+                    const decription = userData.description;
+                    const email = userData.email;
 
-                    console.log('User name:', userName);
+
+                    const firstNameElement = document.getElementById('firstname');
+                    const lastNameElement = document.getElementById('lastname');
+                    const emailElement = document.getElementById('email');
+
+                    firstNameElement.textContent = firstName;
+                    lastNameElement.textContent = lastName;
+                    emailElement.textContent = user.email;
+
+                })
+
+                const profileRef = databaseRef(db, `Users/${userId}/ProfileImg`);
+                const userImgElement = document.getElementById('userImg');
+                const NavuserImgElement = document.getElementById('Navuserimg');
+                const NavuserImgResElement = document.getElementById('NavuserimgRes');
+                onValue(profileRef, (snapshot) => {
+                    const profileImg = snapshot.val();
+                    if (profileImg && profileImg.profileImgUrl) {
+                        userImgElement.src = profileImg.profileImgUrl
+                        NavuserImgElement.src = profileImg.profileImgUrl
+                        NavuserImgResElement.src = profileImg.profileImgUrl
+                    } else {
+
+                        userImgElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                        NavuserImgElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                        NavuserImgResElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                    }
+
+                    // const profileImgUrl = profileImg.profileImgUrl;
+                    // userImgElement.src = profileImgUrl;
                 })
 
                 const videosRef = databaseRef(db, `Users/${userId}/videos`);
@@ -118,7 +491,7 @@
                     const videoContainer = document.getElementById('video-container');
 
                     // Clear previous videos
-                    videoContainer.innerHTML = '';
+                    // videoContainer.innerHTML = '';
 
                     if (videos) {
                         // Display the videos
@@ -127,21 +500,33 @@
 
                             // Create a video element for each video
                             const videoElement = document.createElement('video');
+                            videoElement.classList.add('w-3/4', 'h-96', 'm-5', 'object-cover', 'rounded-lg')
                             videoElement.src = videoMetadata.url;
                             videoElement.controls = true;
 
+                            const videoDescription = document.createElement('p');
+                            // videoDescription.textContent = desc;
+                            videoDescription.classList.add('w-3/4', 'text-start', 'text-sm', 'font-italics', 'text-grey-700', 'p-3', 'h-20');
+                            videoDescription.textContent = videoMetadata.description;
+
                             // Append the video element to the container
                             videoContainer.appendChild(videoElement);
+                            videoContainer.appendChild(videoDescription);
                         }
                     } else {
                         console.log('No videos found')
                     }
                 })
+
+                loadingPage.style.display = 'none';
+                videoContainer.style.display = 'flex';
             }
             // } else {
             //     console.log('User not logged in');
             // }
         }
+
+
 
         auth.onAuthStateChanged((user) => {
             if (user) {
@@ -176,7 +561,7 @@
         let timeOut;
         function resetTimeout() {
             clearTimeout(timeOut);
-            timeOut = setTimeout(logout, 60000)
+            timeOut = setTimeout(logout, 600000)
         }
 
         function logout() {
@@ -189,11 +574,31 @@
                 })
         }
 
+        const logoutBtn = document.getElementById('logOutBtn');
+        logoutBtn.addEventListener('click', logout)
+
         document.addEventListener('mousemove', resetTimeout);
         document.addEventListener('keypress', resetTimeout);
         document.addEventListener('mousedown', resetTimeout);
 
         resetTimeout();
+
+        const userAuthtenticated = sessionStorage.getItem('userAuthenticated');
+        if (userAuthtenticated === 'true') {
+            const signup = document.getElementById('signup');
+            const signin = document.getElementById('signin')
+            const signupRes = document.getElementById('signup-res');
+            const signinRes = document.getElementById('signin-res')
+            const Navuserimg = document.getElementById('Navuserimg');
+            const NavuserimgRes = document.getElementById('NavuserimgRes');
+
+            signupRes.style.display = 'none'
+            signinRes.style.display = 'none'
+            signin.style.display = 'none'
+            signup.style.display = 'none'
+            Navuserimg.style.display = 'flex'
+            NavuserimgRes.style.display = 'flex'
+        }
     </script>
 </body>
 
