@@ -138,6 +138,7 @@
                 }).catch((error) => {
                     const errorMsg = document.querySelector('.error')
                     errorMsg.classList.remove('hidden')
+                    sessionStorage.setItem('userAuthenticated', 'false')
 
                     const errorCode = error.code;
                     const errorMessage = error.message;

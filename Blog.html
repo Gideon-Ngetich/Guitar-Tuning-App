@@ -239,8 +239,10 @@
               }
 
               const blogContent = document.createElement('p')
-              blogContent.classList.add('blog-content')
+              blogContent.classList.add('blog-content', 'overflow-scroll')
               blogContent.innerText = blogMetaData.content
+
+               
 
               const blogAuthor = document.createElement('p')
               blogAuthor.classList.add('blog-author', 'text-sm')
@@ -268,7 +270,7 @@
               uploaderInfoDiv.appendChild(blogAuthor)
 
               const uploaderAndDateDiv = document.createElement('div')
-              uploaderAndDateDiv.classList.add('flex', 'justify-start', 'items-center', 'flex-grow', 'border-t', 'border-black', 'm-3')
+              uploaderAndDateDiv.classList.add('uploaderAndDateDiv','block','lg:flex', 'justify-start', 'items-center', 'flex-grow', 'border-t', 'border-black', 'm-3')
               uploaderAndDateDiv.appendChild(uploaderInfoDiv)
               uploaderAndDateDiv.appendChild(uploadDateElement)
 

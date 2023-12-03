@@ -3,50 +3,74 @@
 @import 'tailwindcss/utilities';
 
 .video-item:focus {
-    @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto z-50 filter blur-lg;
+  @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto z-50 filter blur-lg;
 }
 
 
 #loading-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255,255,255,0.8);
-    z-index: 9999;
-  }
-  
-  .spinner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    border: 4px solid #333;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -50%) rotate(360deg);
-    }
-  }
-  
-  #blog-container {
-    display: none; /* Hide the container initially */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 9999;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid #333;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
 
-  #video-container {
-    display: none; /* Hide the container initially */
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
+}
 
-  #Navuserimg, #NavuserimgRes{
-    display: none; /* Hide the container initially */
-  }
+#blog-container {
+  display: none;
+  /* Hide the container initially */
+}
+
+#video-container {
+  display: none;
+  /* Hide the container initially */
+}
+
+#Navuserimg,
+#NavuserimgRes {
+  display: none;
+  /* Hide the container initially */
+}
+
+#progressed {
+  position: relative;
+  width: 0%;
+  background-color: #ff0000;
+  transition: all 2s;
+  height: 5px;
+}
+
+#progressed:after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background-color: #ff0000;
+}
