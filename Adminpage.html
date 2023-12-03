@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="loading-page">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="flex justify-center items-center bg-blue-900 h-16 md:h-32">
+        <h1 class="text-xl md:text-3xl font-bold text-white">Admin Dashboard</h1>
+    </div>
+
+    <div class="flex flex-col items-center justify-center m-8">
+        <img id="userImg"
+            src="https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047"
+            alt="User Avatar" class="w-52 h-52 rounded-full">
+
+        <div class="uploadProfile mt-5">
+            <input type="file" name="profileImg" id="profileImg" accept="image/*">
+            <button id="profileImgBtn"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded m-5">Change Profile</button>
+        </div>
+    </div>
+
+    <div class="flex flex-col justify-center px-10 mb-8 h-64 w-full bg-blue-100">
+        <h2 class="text-2xl text-black font-bold mb-2 pb-7">User Information</h2>
+        <div class="info flex">
+            <label class="px-3 font-bold text-xl lg:text-2xl" for="firstname">Firstname: </label>
+            <p id="firstname" class="text-xl"></p>
+        </div>
+        <div class="info flex">
+            <label class="px-3 font-bold text-xl lg:text-2xl" for="lastname">Lastname: </label>
+            <p id="lastname" class="text-xl"></p>
+        </div>
+
+        <div class="info flex">
+            <label class="px-3 font-bold text-xl lg:text-2xl" for="email">Email: </label>
+            <p id="email" class="text-xl"></p>
+        </div>
+        <div class="m-5">
+            <button id="logOutBtn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 w-40 rounded">Log
+                Out</button>
+        </div>
+
+    </div>
+
+    <div id="appSummary" class="appSummary flex flex-col lg:flex-row justify-center items-center gap-3">
+
+    </div>
+    <div class="listings flex justify-center m-1 lg:M-10 flex-col items-center">
+        <div class="heading w-full lg:w-4/5 justify-center items-center grid grid-cols-3">
+            <span class="font-bold text-sm lg:text-xl bg-gray-400 h-16 text-center flex justify-start p-4 items-center">Profile
+                Image</span>
+            <span
+                class="font-bold text-sm lg:text-xl bg-gray-400 h-16 text-center flex justify-start p-4 items-center">Username</span>
+            <span
+                class="font-bold text-sm lg:text-xl bg-gray-400 h-16 text-center flex justify-start p-4 items-center">Email</span>
+        </div>
+        <div id="users" class="users w-full lg:w-4/5 overflow-scroll h-96 bg-gray-200 justify-center">
+
+        </div>
+    </div>
+
+
+    <script src="app.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+        import { onValue, getDatabase, set, ref as databaseRef } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"
+        import { getStorage, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyADlFpFRYXFTTnYtdPWaS5FpylahOkyTek",
+            authDomain: "guitar-tunner-9bd54.firebaseapp.com",
+            projectId: "guitar-tunner-9bd54",
+            storageBucket: "guitar-tunner-9bd54.appspot.com",
+            messagingSenderId: "534214805325",
+            appId: "1:534214805325:web:8941f0e10a240d5d085904",
+            measurementId: "G-4F13BLVGNM"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const storage = getStorage(app);
+        const auth = getAuth(app)
+        const db = getDatabase(app)
+
+        const userRef = databaseRef(db, 'Users');
+        const appSummary = document.getElementById('appSummary')
+        const loadingPage = document.getElementById('loading-page')
+
+        onValue(userRef, (snapshot) => {
+            const users = snapshot.val();
+            const userCount = users ? Object.keys(users).length : 0;
+
+
+
+            const NoOfUsers = document.createElement('div');
+            NoOfUsers.classList.add('bg-red-500', 'h-50', 'w-60', 'rounded-lg', 'p-5')
+
+            const title = document.createElement('p')
+            title.classList.add = ('text-xl')
+            title.innerText = 'Number Of Users'
+
+            const number = document.createElement('span');
+            number.innerText = userCount;
+            number.classList.add('font-bold', 'text-xl', 'lg:text-3xl')
+
+            NoOfUsers.appendChild(title);
+            NoOfUsers.appendChild(number);
+
+            appSummary.appendChild(NoOfUsers)
+
+
+            // Use userCount as needed (e.g., display on the UI, perform further operations)
+        });
+
+        onValue(userRef, (snapshot) => {
+            const users = snapshot.val();
+            let totalBlogs = 0;
+
+            if (users) {
+                Object.keys(users).forEach(userId => {
+                    const userBlogRef = databaseRef(db, `Users/${userId}/Blogs`);
+                    onValue(userBlogRef, (blogSnapshot) => {
+                        const userBlogs = blogSnapshot.val();
+                        if (userBlogs) {
+                            const userBlogCount = Object.keys(userBlogs).length;
+                            totalBlogs += userBlogCount;
+                        }
+                    });
+                });
+                loadingPage.style.display = 'none';
+
+            }
+
+            const NoOfBlogs = document.createElement('div')
+            NoOfBlogs.classList.add('bg-blue-500', 'h-50', 'w-60', 'rounded-lg', 'p-5')
+
+            const title = document.createElement('p')
+            title.classList.add = ('text-xl')
+            title.innerText = 'Number Of Blogs Uploaded'
+
+            const number = document.createElement('span')
+            number.classList.add('font-bold', 'text-xl', 'lg:text-3xl');
+            number.innerText = `${totalBlogs}`
+
+            NoOfBlogs.appendChild(title)
+            NoOfBlogs.appendChild(number)
+
+            appSummary.appendChild(NoOfBlogs)
+
+            // Use totalBlogs as needed (e.g., display on the UI, perform further operations)
+        });
+
+        onValue(userRef, (snapshot) => {
+            const users = snapshot.val();
+            let totalVideos = 0;
+
+            if (users) {
+                Object.keys(users).forEach(userId => {
+                    const userVideoRef = databaseRef(db, `Users/${userId}/videos`);
+                    onValue(userVideoRef, (videoSnapshot) => {
+                        const userVideos = videoSnapshot.val();
+                        if (userVideos) {
+                            const userVideoCount = Object.keys(userVideos).length;
+                            totalVideos += userVideoCount;
+                        }
+                    });
+                });
+                loadingPage.style.display = 'none';
+
+            }
+
+            const NoOfVideos = document.createElement('div')
+            NoOfVideos.classList.add('bg-blue-500', 'h-50', 'rounded-lg', 'p-5')
+
+            const title = document.createElement('p')
+            title.classList.add = ('text-xl')
+            title.innerText = 'Number Of Videos Uploaded'
+
+            const number = document.createElement('span')
+            number.classList.add('font-bold', 'text-xl', 'lg:text-3xl');
+            number.innerText = `${totalVideos}`
+
+            NoOfVideos.appendChild(title)
+            NoOfVideos.appendChild(number)
+
+            appSummary.appendChild(NoOfVideos)
+
+           
+        });
+
+        onValue(userRef, (snapshot) => {
+            const users = snapshot.val();
+
+            for (const userId in users) {
+                const userData = users[userId].userData;
+                const profileImg = users[userId].ProfileImg;
+
+                if (userData) {
+                    const userName = userData.firstName + ' ' + userData.lastName;
+                    const userDiv = document.getElementById('users')
+
+                    const userSpan = document.createElement('span')
+                    userSpan.classList.add('grid', 'grid-cols-3', 'm-5', 'items-start', 'justify-start', 'grid-gap-1', 'border-b', 'border-white', 'p-2', 'md:text-sm')
+
+                    const user = document.createElement('span');
+                    user.classList.add('flex', 'text-start')
+                    user.innerText = userName;
+                    console.log(userName)
+
+
+
+                    const userImg = document.createElement('img');
+                    userImg.classList.add('w-14', 'h-14', 'rounded-full')
+                    if (profileImg && profileImg.profileImgUrl) {
+                        userImg.src = profileImg.profileImgUrl
+                        console.log(profileImg.profileImgUrl)
+                    } else {
+                        userImg.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2Fuser-icon-image-placeholder-300-grey.jpg?alt=media&token=63ff1f07-53f7-44b8-ae55-fbe1b01ca44f'
+                    }
+                    const email = document.createElement('div');
+                    email.classList.add('flex', 'items-start', 'justify-start',)
+                    email.innerText = userData.email
+
+                    userSpan.appendChild(userImg)
+                    userSpan.appendChild(user)
+                    userSpan.appendChild(email)
+
+
+                    userDiv.appendChild(userSpan)
+
+                }
+
+            }
+        })
+
+        function uploadProfileimg(file) {
+            const loadingPage = document.getElementById('loading-page');
+
+            // loadingPage.style.display = 'block';
+
+            try {
+                const user = auth.currentUser;
+
+                if (user) {
+                    const userId = user.uid;
+                    console.log(userId);
+
+                    const storageRef = ref(storage, `AdminProfile/${file.name}`);
+                    uploadBytes(storageRef, file);
+
+                    const profileImgName = file.name;
+                    const profileImgUrl = `https://firebasestorage.googleapis.com/v0/b/${storageRef.bucket}/o/${encodeURIComponent(storageRef.fullPath)}?alt=media`;
+
+                    set(databaseRef(db, 'Admins/' + user.uid + '/AdminProfile/'), { profileImgUrl })
+                        .then(() => {
+                            // Hide the loading page once the data is set successfully
+                            loadingPage.style.display = 'none';
+                            console.log('Data set successful');
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                    console.log('Profile image uploaded successfully!');
+
+                } else {
+                    console.log('User not logged in');
+                }
+                location.reload()
+            } catch (error) {
+                console.error('Error uploading profile image:', error);
+            }
+        }
+
+        const profileImgBtn = document.getElementById('profileImgBtn');
+        profileImgBtn.addEventListener('click', () => {
+            const file = profileImg.files[0];
+            if (file) {
+                uploadProfileimg(file);
+            } else {
+                console.log('No file selected.');
+            }
+        });
+
+        function fetchProfileImg() {
+            const user = auth.currentUser;
+            const userId = user.uid
+            if (user) {
+                const profileRef = databaseRef(db, `Admins/${userId}/AdminProfile`);
+                const userImgElement = document.getElementById('userImg');
+
+                onValue(profileRef, (snapshot) => {
+                    const profileImg = snapshot.val();
+                    
+                    if (profileImg && profileImg.profileImgUrl) {
+                        userImgElement.src = profileImg.profileImgUrl
+
+                    } else {
+
+                        userImgElement.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2FUserAccountImg.jpg?alt=media&token=196736bc-792c-4f98-bef2-5ce5f2efa047'
+                    }
+
+                    // const profileImgUrl = profileImg.profileImgUrl;
+                    // userImgElement.src = profileImgUrl;
+                })
+
+            }
+        }
+
+        function fetchAndDisplayUserData() {
+            const user = auth.currentUser;
+            const loadingPage = document.getElementById('loading-page');
+
+            loadingPage.style.display = 'block';
+
+            if (user) {
+                const userId = user.uid;
+
+
+                const userRef = databaseRef(db, `Users/${userId}/userData`);
+                onValue(userRef, (snapshot) => {
+                    const userData = snapshot.val();
+                    const firstName = userData.firstName;
+                    const lastName = userData.lastName;
+                    const email = userData.email;
+
+
+                    const firstNameElement = document.getElementById('firstname');
+                    const lastNameElement = document.getElementById('lastname');
+                    const emailElement = document.getElementById('email');
+
+                    firstNameElement.textContent = firstName;
+                    lastNameElement.textContent = lastName;
+                    emailElement.textContent = user.email;
+
+                })
+            }
+        }
+
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // Call fetchAndDisplayVideos when the user is logged in
+                fetchProfileImg();
+                fetchAndDisplayUserData();
+            } else {
+                console.log('User not logged in');
+            }
+        });
+
+        const fileInput = document.getElementById('file-input');
+
+        fileInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+        });
+
+        const uploadButton = document.getElementById('upload-button');
+
+        uploadButton.addEventListener('click', () => {
+            const file = fileInput.files[0];
+            if (file) {
+
+                fetchProfileImg()
+            } else {
+                console.log('No file selected.');
+            }
+        });
+
+        
+
+        window.addEventListener('load', fetchAndDisplayUserData)
+
+        let timeOut;
+        function resetTimeout() {
+            clearTimeout(timeOut);
+            timeOut = setTimeout(logout, 600000)
+        }
+
+        function logout() {
+            auth.signOut().then(() => {
+                sessionStorage.removeItem('userAuthenticated')
+                window.location.href = 'login.html'
+            })
+                .catch((error) => {
+                    console.log('Error logging out', error);
+                })
+        }
+
+        const logoutBtn = document.getElementById('logOutBtn');
+        logoutBtn.addEventListener('click', logout)
+
+        document.addEventListener('mousemove', resetTimeout);
+        document.addEventListener('keypress', resetTimeout);
+        document.addEventListener('mousedown', resetTimeout);
+
+        resetTimeout();
+
+        const userAuthtenticated = sessionStorage.getItem('userAuthenticated');
+        if (userAuthtenticated === 'true') {
+            const signup = document.getElementById('signup');
+            const signin = document.getElementById('signin')
+            const signupRes = document.getElementById('signup-res');
+            const signinRes = document.getElementById('signin-res')
+            const Navuserimg = document.getElementById('Navuserimg');
+            const NavuserimgRes = document.getElementById('NavuserimgRes');
+
+            signupRes.style.display = 'none'
+            signinRes.style.display = 'none'
+            signin.style.display = 'none'
+            signup.style.display = 'none'
+            Navuserimg.style.display = 'flex'
+            NavuserimgRes.style.display = 'flex'
+        }
+
+    </script>
+</body>
+
+</html>

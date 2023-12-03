@@ -155,8 +155,7 @@
     </div>
 
     <!-- Container for the videos -->
-    <div id="video-container" class="flex-col w-full m-2 lg:m-2 gap-2 items-center flex-wrap justify-center ">
-        <div id="userproileimg" class="userproileimg"></div>
+    <div id="video-container" class="flex-col w-full gap-3 items-center flex-wrap justify-center ">
     </div>
 
     <script src="app.js"></script>
@@ -208,273 +207,68 @@
 
                     if (userData) {
                         const userName = userData.firstName + ' ' + userData.lastName;
+                        const videoContainer = document.getElementById('video-container');
+
 
                         for (const videoId in videos) {
                             const videoMetadata = videos[videoId].videoMetadata;
+                            const videoWrapper = document.createElement('div')
+                            videoWrapper.classList.add('w-full', 'lg:w-3/4', 'block', 'items-center', 'justify-center')
 
-                            // Create a div for the video and uploader information
-                            const videoWrapper = document.createElement('div');
-                            videoWrapper.classList.add('flex', 'flex-col', 'w-3/4', 'lg:w-1/2', 'h-auto', 'lg:h-screen', 'p-1', 'bg-grey-400', 'shadow-lg', 'rounded-lg', 'relative');
-
-                            // Create a video element for each video
                             const videoElement = document.createElement('video');
-                            videoElement.classList.add('video-item', 'h-96', 'cover', 'w-full', 'aspect-video', 'flex', 'items-center', 'justify-bottom', 'bg-gray-2');
+                            videoElement.classList.add('videoItems','w-full', 'h-96', 'm-3', 'object-cover', 'rounded-lg')
                             videoElement.src = videoMetadata.url;
-                            videoElement.controls = false; // Disable default video controls
+                            videoElement.controls = true;
 
-                            // Create a play button wrapper
-                            const playButtonWrapper = document.createElement('div');
-                            playButtonWrapper.classList.add('play-button-wrapper', 'absolute', '-top-20', 'inset-52', 'flex', 'items-center', 'justify-center', 'bg-gray-2', 'w-30', 'h-30', '-z-30');
-
-                            // Create a play button for video controls
-                            const playButton = document.createElement('button');
-                            playButton.classList.add('play-button', 'flex', 'text-white', 'text-4xl', 'focus:outline-none',);
-                            playButton.textContent = '▶';
-
-                            const pauseButton = document.createElement('button');
-                            pauseButton.classList.add('pause-button', 'flex', 'text-white', 'text-4xl', 'focus:outline-none', 'z-40');
-                            pauseButton.textContent = '❚❚';
-                            pauseButton.style.display = 'none'; // Hide the pause button initially
-
-
-
-                            // playButton.addEventListener('click', function () {
-                            //     if (videoElement.paused) {
-                            //         videoElement.play();
-                            //         playButton.style.display = 'none'; // Hide the play button when the video is playing
-                            //         pauseButton.style.display = 'block'; // Show the pause button when the video is playing
-
-                            //         setTimeout(function () {
-                            //             pauseButton.style.display = 'none'; // Hide the pause button after a few seconds
-                            //         }, 3000); // Adjust the duration in milliseconds (e.g., 3000ms = 3 seconds)
-                            //     } else {
-                            //         videoElement.pause();
-                            //         playButton.style.display = 'block'
-                            //     }
-
-
-                            // });
-
-                            // playButton.addEventListener('click', function () {
-                            //     const videos = document.querySelectorAll('video');
-                            //     const currentVideo = videoElement;
-
-                            //     if (currentVideo.paused) {
-                            //         videos.forEach(function (video) {
-                            //             if (video !== currentVideo) {
-                            //                 video.pause();
-                            //             }
-                            //         });
-
-                            //         currentVideo.play();
-                            //         playButton.style.display = 'none';
-                            //         pauseButton.style.display = 'block';
-
-                            //         setTimeout(function () {
-                            //             pauseButton.style.display = 'none';
-                            //         }, 3000);
-                            //     } else {
-                            //         currentVideo.pause();
-                            //         playButton.style.display = 'block';
-                            //     }
-                            // });
-
-
-
-                            // videoElement.addEventListener('click', function () {
-                            //     if (videoElement.paused) {
-                            //         videoElement.play();  // Start playing the video
-                            //         playButton.style.display = 'none';  // Hide the play button
-                            //         pauseButton.style.display = 'block'; // Show the pause button
-                            //     } else {
-                            //         videoElement.pause();  // Pause the video
-                            //         pauseButton.style.display = 'none'; // Hide the pause button
-                            //         playButton.style.display = 'block'; // Show the play button
-                            //     }
-                            // });
-
-                            playButton.addEventListener('click', function () {
-                                const videos = document.querySelectorAll('video');
-                                const currentVideo = videoElement;
-
-                                if (currentVideo.paused) {
-                                    videos.forEach(function (video) {
-                                        if (video !== currentVideo) {
-                                            video.pause();
-                                        }
-                                    });
-
-                                    currentVideo.play();
-                                    playButton.style.display = 'none';
-                                    pauseButton.style.display = 'block';
-
-                                    setTimeout(function () {
-                                        pauseButton.style.display = 'none';
-                                    }, 3000);
-                                } else {
-                                    currentVideo.pause();
-                                    pauseButton.style.display = 'none'
-                                    playButton.style.display = 'block';
-                                }
-                            });
-
-                            videoElement.addEventListener('click', function () {
-                                const videos = document.querySelectorAll('video')
-                                const currentVideo = videoElement
-
-                                if (currentVideo.paused){
-                                    videos.forEach(function(video){
-                                        if(video !== currentVideo){
-                                            video.pause()
-                                        }
-                                    })
-                                    currentVideo.play();
-                                    playButton.style.display = 'none'
-                                    pauseButton.style.display = 'block'
-                                }else if(!currentVideo){
-                                    pauseButton.style.display = 'none'
-                                    playButton.style.display = 'block'
-                                }else{
-                                    currentVideo.pause()
-                                    pauseButton.style.display = 'none'
-                                    playButton.style.display = 'block'
-                                }
-                                
-                            });
-
-                            pauseButton.addEventListener('click', function () {
-                                if (!videoElement.paused) {
-                                    videoElement.pause();
-                                    pauseButton.style.display = 'none'; // Hide the pause button when the video is paused
-                                    playButton.style.display = 'block'; // Show the play button when the video is paused
-                                }
-                            });
-
-                            videoElement.addEventListener('ended', function () {
-                                playButton.style.display = 'block'
-                            })
-
-                            // Add event listeners to show/hide pause button on hover
-                            videoWrapper.addEventListener('mouseenter', function () {
-                                if (!videoElement.paused) {
-                                    pauseButton.style.display = 'block';
-                                }
-                            });
-
-                            videoWrapper.addEventListener('mouseleave', function () {
-                                if (!videoElement.paused) {
-                                    pauseButton.style.display = 'none';
-                                }
-                            });
-
-
-
-                            // Append the play button to the play button wrapper
-                            playButtonWrapper.appendChild(playButton);
-                            playButtonWrapper.appendChild(pauseButton);
-
-                            // Append the video element and play button wrapper to the wrapper
-                            videoWrapper.appendChild(videoElement);
-                            videoWrapper.appendChild(playButtonWrapper);
-
-                            // Create seek bar container
-                            const seekBarContainer = document.createElement('div');
-                            seekBarContainer.classList.add('bg-gray-300', 'relative', 'cursor-pointer', 'm-2', '-top-14');
-                            seekBarContainer.id = 'seekbarContainer';
-
-                            // function setUpVideoPlayer(){
-                            //     const videos = videoElement;
-                            //     let activeVideo = null;
-
-                            //     videos.forEach(function(video){
-                            //         video.addEventListener('play', function(){
-                            //             if(activeVideo && activeVideo !== vide0){
-                            //                 activeVideo.pause()
-                            //             }
-                            //             activeVideo = video
-                            //         })
-                            //     })
-
-                            // }
-
-                            // Create seek bar progress element
-                            const Progressed = document.createElement('div');
-                            Progressed.classList.add('h-full', 'bg-red-500');
-                            Progressed.id = 'progressed';
-
-                            videoElement.ontimeupdate = function () {
-                                Progressed.style.width = Math.floor(videoElement.currentTime * 100 / videoElement.duration) + "%";
-                            }
-                            seekBarContainer.onclick = function (e) {
-                                videoElement.currentTime = (e.offsetX / seekBarContainer.offsetWidth) * videoElement.duration;
-                            }
-
-                            // Append progress and thumb to the seek bar container
-                            seekBarContainer.appendChild(Progressed);
-
-                            // Append seek bar container to the document body or any desired parent element
-                            document.body.appendChild(seekBarContainer);
-
-                            videoWrapper.appendChild(seekBarContainer);
-
-                            const userInfo = document.createElement('div');
-                            userInfo.classList.add('flex', 'gap-2', 'mt-2');
-
-                            // Create a paragraph element for the uploader's name
-                            const uploaderElement = document.createElement('p');
-                            uploaderElement.classList.add('text-start', 'text-3xl', 'lg:text-sm', 'font-italics', 'text-grey-700', 'p-4');
-                            uploaderElement.textContent = "Artist: " + userName;
+                            const videoFooter = document.createElement('div')
+                            videoFooter.classList.add('block', 'p-5')
 
                             const videoDescription = document.createElement('p');
-                            videoDescription.classList.add('text-start', 'text-3xl', 'lg:text-sm', 'font-italics', 'text-grey-700', 'bg-gray-200', 'p-2', 'lg:p-1', 'h-30', 'overflow-elipsis', 'md:overflow-hidden');
+                            videoDescription.classList.add('w-3/4', 'text-start', 'text-2xl', 'lg:text-sm', 'font-italics', 'text-grey-700', 'p-3', 'h-auto', 'w-full', 'text-start',);
                             videoDescription.textContent = videoMetadata.description;
 
-                            const userImgElement = document.createElement('img');
-                            userImgElement.classList.add('rounded-full', 'h-20', 'w-20', 'lg:h-14', 'lg:w-14', 'object-cover', 'object-center', 'flex-shrink-0',);
+                            videoFooter.appendChild(videoDescription)
 
-                            // Check if profile image exists and set the source
+                            const userData = document.createElement('div')
+                            userData.classList.add('flex', 'w-full', 'items-center', 'm-5', 'gap-2')
+
+                            const userImg = document.createElement('img')
+                            userImg.classList.add('user-img', 'w-24', 'h-24', 'lg:w-14', 'lg:h-14', 'rounded-full')
                             if (profileImg && profileImg.profileImgUrl) {
-                                userImgElement.src = profileImg.profileImgUrl;
+                                userImg.src = profileImg.profileImgUrl
+                                console.log(profileImg.profileImgUrl)
                             } else {
-                                // Set a fallback image source if profile image is not available
-                                userImgElement.src = 'fallback-profile-image.jpg';
+                                userImg.src = 'https://firebasestorage.googleapis.com/v0/b/guitar-tunner-9bd54.appspot.com/o/Fallbackimage%2Fuser-icon-image-placeholder-300-grey.jpg?alt=media&token=63ff1f07-53f7-44b8-ae55-fbe1b01ca44f'
                             }
 
-                            // Create a "Read More" button for the video description
-                            const readMoreButton = document.createElement('button');
-                            readMoreButton.classList.add('read-more-button', 'text-blue-500', 'underline', 'mt-2', 'focus:outline-none');
-                            readMoreButton.textContent = 'Read More';
+                            userData.appendChild(userImg);
 
-                            // Add event listener to the "Read More" button
-                            readMoreButton.addEventListener('click', function () {
-                                videoDescription.classList.toggle('h-auto'); // Toggle between auto height and fixed height
-                                if (videoDescription.classList.contains('overflow-hidden')) {
+                            const uploaderName = document.createElement('p')
+                            uploaderName.classList.add('text-xl', 'lg:text-sm')
+                            uploaderName.innerText = userName;
 
-                                    readMoreButton.textContent = 'Read Less';
-                                } else {
-                                    readMoreButton.textContent = 'Read More';
-                                }
+                            userData.appendChild(uploaderName)
+
+                            videoFooter.appendChild(userData)
+
+                            videoWrapper.appendChild(videoElement);
+                            videoWrapper.appendChild(videoFooter);
+
+                            videoContainer.appendChild(videoWrapper)
+
+                            const videoItems = document.querySelectorAll('.videoItems')
+
+                            videoItems.forEach(video => {
+                                video.addEventListener('play', function () {
+                                    // Pause other videos when this one starts playing
+                                    videoItems.forEach(otherVideo => {
+                                        if (otherVideo !== video && !otherVideo.paused) {
+                                            otherVideo.pause();
+                                        }
+                                    });
+                                });
                             });
 
-                            // Append uploader element, video description, and "Read More" button to the user info div
-                            userInfo.appendChild(uploaderElement);
-                            userInfo.appendChild(videoDescription);
-                            userInfo.appendChild(readMoreButton);
-
-                            // Append the video wrapper and user info to the document body
-                            document.body.appendChild(videoWrapper);
-                            document.body.appendChild(userInfo);
-
-
-                            // Append the elements to the wrapper
-                            userInfo.appendChild(userImgElement);
-                            userInfo.appendChild(uploaderElement);
-                            videoWrapper.appendChild(videoDescription);
-                            videoWrapper.appendChild(readMoreButton);
-                            videoWrapper.appendChild(userInfo);
-
-                            // Append the video wrapper to the container
-                            videosContainer.appendChild(videoWrapper);
                         }
                     }
                     loadingPage.style.display = 'none';

@@ -176,8 +176,8 @@
             <div class="heading flex justify-center items-center">
                 <h2 class="text-2xl font-bold m-5 border-b-2 border-black">My Blogs</h2>
             </div>
-            <div class="container">
-                <div class="blog-container grid-cols-1 md:grid-cols-2 gap-4" id="blog-container">
+            <div class="flex justify-center items-center" >
+                <div class="blog-container grid-cols-1 text-center justify-center items-center md:grid-cols-2 gap-4" id="blog-container">
 
                 </div>
             </div>
@@ -416,6 +416,13 @@
 
                             blogContainer.appendChild(blogElement);
                         }
+                    }else{
+                        console.log("No blogs found")
+                        const message = document.createElement('p')
+                        message.classList.add('text-2xl', 'text-gray-400', 'm-10','w-full', 'flex', 'justify-center', 'items-center')
+                        message.innerText = 'No videos found'
+
+                        blogContainer.appendChild(message)
                     }
 
                     loadingPage.style.display = 'none'; // Hide the loading page
