@@ -275,6 +275,7 @@
                             // Hide the loading page once the data is set successfully
                             loadingPage.style.display = 'none';
                             console.log('Data set successful');
+                            location.reload();
                         })
                         .catch((error) => {
                             console.log(error);
@@ -284,7 +285,7 @@
                 } else {
                     console.log('User not logged in');
                 }
-                location.reload();
+                
             } catch (error) {
                 console.error('Error uploading profile image:', error);
             }
@@ -333,6 +334,8 @@
                         .then(() => {
                             loadingPage.style.display = 'none';
                             console.log('Data set successful')
+                            alert('Video is being uploaded please wait')
+                            location.reload();
                         })
                         .catch((error) => {
                             console.log(error)
@@ -347,7 +350,7 @@
 
                 decription.value = '';
 
-
+                
             } catch (error) {
                 console.error('Error uploading video:', error);
             }

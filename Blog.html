@@ -148,7 +148,7 @@
     <div class="container">
       <div id="blog-container" class="blog-container grid-cols-1 md:grid-cols-2 gap-4">
 
-      </div>
+      </div> 
     </div>
 
   </div>
@@ -211,13 +211,10 @@
               blogElement.classList.add('blog-element', 'shadow-2xl', 'rounded-xl', 'p-3', 'm-3')
 
               const blogTitle = document.createElement('h2')
-              blogTitle.classList.add('blog-title', 'text-2xl', 'font-bold', 'mb-5')
+              blogTitle.classList.add('blog-title', 'text-2xl', 'font-bold', 'mb-5','h-20')
               blogTitle.innerText = blogMetaData.title
 
-              // const blogBanner = document.createElement('img')
-              // blogBanner.classList.add('blog-banner', 'w-full', 'h-60', 'object-cover;')
-              // blogBanner.src = blogMetaData.banner
-
+              
               const contentSpan = document.createElement('span');
               const fileType = blogMetaData.fileType;
               console.log(fileType)
@@ -227,6 +224,7 @@
                 blogBanner.classList.add('w-full', 'h-60');
                 blogBanner.src = blogMetaData.banner;
                 contentSpan.appendChild(blogBanner)
+                console.log(blogMetaData.banner)
 
 
               } else {
@@ -239,7 +237,7 @@
               }
 
               const blogContent = document.createElement('p')
-              blogContent.classList.add('blog-content', 'overflow-scroll')
+              blogContent.classList.add('blog-content', 'overflow-y-scroll', 'h-96')
               blogContent.innerText = blogMetaData.content
 
                
