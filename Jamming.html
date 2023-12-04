@@ -5,6 +5,7 @@
     <title>Videos Page</title>
     <!-- Include Firebase JavaScript SDK and initialize Firebase -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 
     <style>
@@ -20,18 +21,28 @@
         .blur {
             @apply filter blur-lg;
         }
+
+        @media(min-width: 768px) {
+            .videoItems::webkit-media-controls {
+                width: 100%;
+                height: 100px;
+            }
+        }
     </style>
 
 </head>
 
 <body>
     <nav class="relative px-4 py-4 flex justify-between items-center bg-white">
-        <a class="text-6xl lg:text-3xl font-bold leading-none" href="index.html">
+        <a class="text-3xl font-bold leading-none" href="#">
+            <!-- <svg class="h-10" alt="logo" viewBox="0 0 100 100">
+				<path d="M100 34.2c-.4-2.6-3.3-4-5.3-5.3-3.6-2.4-7.1-4.7-10.7-7.1-8.5-5.7-17.1-11.4-25.6-17.1-2-1.3-4-2.7-6-4-1.4-1-3.3-1-4.8 0-5.7 3.8-11.5 7.7-17.2 11.5L5.2 29C3 30.4.1 31.8 0 34.8c-.1 3.3 0 6.7 0 10v16c0 2.9-.6 6.3 2.1 8.1 6.4 4.4 12.9 8.6 19.4 12.9 8 5.3 16 10.7 24 16 2.2 1.5 4.4 3.1 7.1 1.3 2.3-1.5 4.5-3 6.8-4.5 8.9-5.9 17.8-11.9 26.7-17.8l9.9-6.6c.6-.4 1.3-.8 1.9-1.3 1.4-1 2-2.4 2-4.1V37.3c.1-1.1.2-2.1.1-3.1 0-.1 0 .2 0 0zM54.3 12.3L88 34.8 73 44.9 54.3 32.4V12.3zm-8.6 0v20L27.1 44.8 12 34.8l33.7-22.5zM8.6 42.8L19.3 50 8.6 57.2V42.8zm37.1 44.9L12 65.2l15-10.1 18.6 12.5v20.1zM50 60.2L34.8 50 50 39.8 65.2 50 50 60.2zm4.3 27.5v-20l18.6-12.5 15 10.1-33.6 22.4zm37.1-30.5L80.7 50l10.8-7.2-.1 14.4z"></path>
+			</svg> -->
             AjayTuner
         </a>
         <div class="flex">
-            <button class="navbar-burger flex items-center text-blue-600 p-3 lg:hidden w-20 h-20">
-                <svg class="block h-10 w-10 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <button class="navbar-burger flex items-center text-blue-600 p-3 lg:hidden">
+                <svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <title>Mobile menu</title>
                     <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                 </svg>
@@ -39,7 +50,7 @@
             <div class="hidden lg:inline-block">
                 <a href="Userprofile.html" id="navimgelementLink" class="lg:inline-block md:hidden">
                     <div id="navuserImgDiv" class="user-img w-14 h-14 rounded-full lg:inline-block md:hidden">
-                        <img id="Navuserimg" class="Navuserimg hidden rounded-full w-14 h-14 " src="" alt="">
+                        <img id="Navuserimg" class="hidden Navuserimg rounded-full w-14 h-14 " src="" alt="">
                     </div>
                 </a>
             </div>
@@ -89,13 +100,17 @@
     </nav>
     <div class="navbar-menu relative z-50 hidden">
         <div class="navbar-backdrop fixed inset-0 bg-gray-800 opacity-25"></div>
-        <nav class="fixed top-0 left-0 bottom-0 flex flex-col w-9/12 py-6 px-6 bg-white border-r overflow-y-auto">
+        <nav
+            class="fixed top-0 left-0 bottom-0 flex flex-col w-5/6 max-w-sm py-6 px-6 bg-white border-r overflow-y-auto">
             <div class="flex items-center mb-8">
-                <a class="mr-auto text-6xl font-bold leading-none max-w-sm" href="index.html">
+                <a class="mr-auto text-3xl font-bold leading-none" href="#">
+                    <!-- <svg class="h-12" alt="logo" viewBox="0 0 100 100">
+						<path d="M100 34.2c-.4-2.6-3.3-4-5.3-5.3-3.6-2.4-7.1-4.7-10.7-7.1-8.5-5.7-17.1-11.4-25.6-17.1-2-1.3-4-2.7-6-4-1.4-1-3.3-1-4.8 0-5.7 3.8-11.5 7.7-17.2 11.5L5.2 29C3 30.4.1 31.8 0 34.8c-.1 3.3 0 6.7 0 10v16c0 2.9-.6 6.3 2.1 8.1 6.4 4.4 12.9 8.6 19.4 12.9 8 5.3 16 10.7 24 16 2.2 1.5 4.4 3.1 7.1 1.3 2.3-1.5 4.5-3 6.8-4.5 8.9-5.9 17.8-11.9 26.7-17.8l9.9-6.6c.6-.4 1.3-.8 1.9-1.3 1.4-1 2-2.4 2-4.1V37.3c.1-1.1.2-2.1.1-3.1 0-.1 0 .2 0 0zM54.3 12.3L88 34.8 73 44.9 54.3 32.4V12.3zm-8.6 0v20L27.1 44.8 12 34.8l33.7-22.5zM8.6 42.8L19.3 50 8.6 57.2V42.8zm37.1 44.9L12 65.2l15-10.1 18.6 12.5v20.1zM50 60.2L34.8 50 50 39.8 65.2 50 50 60.2zm4.3 27.5v-20l18.6-12.5 15 10.1-33.6 22.4zm37.1-30.5L80.7 50l10.8-7.2-.1 14.4z"></path>
+					</svg> -->
                     AjayTuner
                 </a>
                 <button class="navbar-close">
-                    <svg class="h-12 w-12 text-gray-400 cursor-pointer hover:text-gray-500"
+                    <svg class="h-6 w-6 text-gray-400 cursor-pointer hover:text-gray-500"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
                         </path>
@@ -105,29 +120,29 @@
             <div>
 
                 <a href="Userprofile.html" id="navimgelementResLink" class=" lg:flex">
-                    <div id="navprofileImgDiv" class="user-img w-40 h-40 rounded-full my-20 ">
-                        <img id="NavuserimgRes" class="Navuserimg rounded-full w-40 h-40 mx-20" src="" alt="">
+                    <div id="navprofileImgDiv" class="user-img w-14 h-14 rounded-full ">
+                        <img id="NavuserimgRes" class="hidden Navuserimg rounded-full w-14 h-14" src="" alt="">
                     </div>
                 </a>
                 <ul>
-                    <li class="m-20">
-                        <a class="block p-4 text-4xl font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
                             href="index.html">Home</a>
                     </li>
-                    <li class="m-20">
-                        <a class="block p-4 text-4xl font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black  hover:bg-blue-50 hover:text-blue-600 rounded"
                             href="Aboutus.html">About Us</a>
                     </li>
-                    <li class="m-20">
-                        <a class="block p-4 text-4xl font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
                             href="Tunner.html">Tuner</a>
                     </li>
-                    <li class="m-20">
-                        <a class="block p-4 text-4xl font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-black hover:bg-blue-50 hover:text-blue-600 rounded"
                             href="Blog.html">Blog</a>
                     </li>
-                    <li class="m-20">
-                        <a class="block p-4 text-4xl font-semibold text-blue-500 hover:bg-blue-50 hover:text-blue-600 rounded"
+                    <li class="mb-1">
+                        <a class="block p-4 text-sm font-semibold text-blue-500 hover:bg-blue-50 hover:text-blue-600 rounded"
                             href="Jamming.html">Jamming</a>
                     </li>
                 </ul>
@@ -145,9 +160,8 @@
             </div>
         </nav>
     </div>
-    <div class="flex justify-center items-center bg-blue-900 h-10 w-full md:h-36">
-        <h1 class="text-6xl lg:text-xl w-full flex justify-center items-center font-bold text-white">Jamming Sessions
-        </h1>
+    <div class="flex justify-center items-center bg-blue-900 h-16 md:h-32">
+        <h1 class="text-xl md:text-3xl font-bold text-white">Jamming</h1>
     </div>
 
     <div id="loading-page">
@@ -213,27 +227,27 @@
                         for (const videoId in videos) {
                             const videoMetadata = videos[videoId].videoMetadata;
                             const videoWrapper = document.createElement('div')
-                            videoWrapper.classList.add('w-full', 'lg:w-3/4', 'block', 'items-center', 'justify-center')
+                            videoWrapper.classList.add('w-full', 'lg:w-3/4', 'block', 'items-center', 'justify-center', 'shadow-md', )
 
                             const videoElement = document.createElement('video');
-                            videoElement.classList.add('videoItems','w-full', 'h-96', 'm-3', 'object-cover', 'rounded-lg')
+                            videoElement.classList.add('videoItems', 'w-full', 'h-3/5', 'lg:h-1/5', 'object-cover', 'rounded-lg','p-1')
                             videoElement.src = videoMetadata.url;
                             videoElement.controls = true;
 
                             const videoFooter = document.createElement('div')
-                            videoFooter.classList.add('block', 'p-5')
+                            videoFooter.classList.add('block', 'p-1')
 
                             const videoDescription = document.createElement('p');
-                            videoDescription.classList.add('w-3/4', 'text-start', 'text-2xl', 'lg:text-sm', 'font-italics', 'text-grey-700', 'p-3', 'h-auto', 'w-full', 'text-start',);
+                            videoDescription.classList.add('w-3/4', 'text-start', 'text-sm', 'lg:text-sm', 'font-italics', 'text-grey-700', 'h-auto', 'w-full', 'text-start',);
                             videoDescription.textContent = videoMetadata.description;
 
                             videoFooter.appendChild(videoDescription)
 
                             const userData = document.createElement('div')
-                            userData.classList.add('flex', 'w-full', 'items-center', 'm-5', 'gap-2')
+                            userData.classList.add('flex', 'w-full', 'items-center', 'm-1', 'gap-2')
 
                             const userImg = document.createElement('img')
-                            userImg.classList.add('user-img', 'w-24', 'h-24', 'lg:w-14', 'lg:h-14', 'rounded-full')
+                            userImg.classList.add('user-img', 'w-14', 'h-14', 'lg:w-14', 'lg:h-14', 'rounded-full')
                             if (profileImg && profileImg.profileImgUrl) {
                                 userImg.src = profileImg.profileImgUrl
                                 console.log(profileImg.profileImgUrl)
@@ -244,7 +258,7 @@
                             userData.appendChild(userImg);
 
                             const uploaderName = document.createElement('p')
-                            uploaderName.classList.add('text-xl', 'lg:text-sm')
+                            uploaderName.classList.add('text-sm', 'lg:text-sm')
                             uploaderName.innerText = userName;
 
                             userData.appendChild(uploaderName)

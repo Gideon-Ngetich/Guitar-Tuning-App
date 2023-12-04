@@ -5,6 +5,8 @@
     <title>Upload Video</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
     <!-- Firebase JavaScript SDK -->
 
@@ -144,9 +146,8 @@
     </div>
 
 
-    <div class="flex w-full justify-start px-20 items-center bg-blue-900 h-5 md:h-24">
+    <div class="flex justify-center items-center bg-blue-900 h-16 md:h-32">
         <h1 class="text-xl md:text-3xl font-bold text-white">User Dashboard</h1>
-
     </div>
    
     <div class="mx-auto">
@@ -159,7 +160,7 @@
             <div class="uploadProfile mt-5">
                 <input type="file" name="profileImg" id="profileImg" accept="image/*">
                 <button id="profileImgBtn"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded">Change Profile</button>
+                    class="bg-blue-500 m-3 hover:bg-blue-700 text-white font-bold py-2 w-40 rounded">Change Profile</button>
             </div>
         </div>
 
@@ -419,13 +420,13 @@
 
                             // Create a video element for each video
                             const videoElement = document.createElement('video');
-                            videoElement.classList.add('w-3/4', 'h-96', 'm-5', 'object-cover', 'rounded-lg')
+                            videoElement.classList.add('w-full',  'w-full', 'h-3/5', 'lg:h-1/5', 'object-cover', 'rounded-lg','p-1')
                             videoElement.src = videoMetadata.url;
                             videoElement.controls = true;
 
                             const videoDescription = document.createElement('p');
                             // videoDescription.textContent = desc;
-                            videoDescription.classList.add('w-3/4', 'text-start', 'text-sm', 'font-italics', 'text-grey-700', 'p-3', 'h-20');
+                            videoDescription.classList.add( 'text-start', 'text-sm', 'lg:text-sm', 'font-italics', 'text-grey-700', 'h-auto', 'w-full', 'text-start',);
                             videoDescription.textContent = videoMetadata.description;
 
                             // Append the video element to the container
