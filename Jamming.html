@@ -9,23 +9,10 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        .video-item {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .video-item:focus {
-            @apply fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-3/4 h-auto z-50 filter blur-lg;
-        }
-
-        .blur {
-            @apply filter blur-lg;
-        }
-
-        @media(min-width: 768px) {
-            .videoItems::webkit-media-controls {
-                width: 100%;
-                height: 100px;
+        @media (min-width: 640px) {
+            .videoItems {
+                width: min-content;
+                height: min-content;
             }
         }
     </style>
@@ -227,15 +214,15 @@
                         for (const videoId in videos) {
                             const videoMetadata = videos[videoId].videoMetadata;
                             const videoWrapper = document.createElement('div')
-                            videoWrapper.classList.add('w-full', 'lg:w-3/4', 'block', 'items-center', 'justify-center', 'shadow-md', )
+                            videoWrapper.classList.add('w-full', 'lg:w-3/4', 'flex','flex-col', 'items-center', 'justify-center', 'shadow-md',)
 
                             const videoElement = document.createElement('video');
-                            videoElement.classList.add('videoItems', 'w-full', 'h-3/5', 'lg:h-1/5', 'object-cover', 'rounded-lg','p-1')
+                            videoElement.classList.add('videoItems', 'w-full', 'h-3/5', 'lg:h-1/5', 'object-cover', 'rounded-lg', 'p-1')
                             videoElement.src = videoMetadata.url;
                             videoElement.controls = true;
 
                             const videoFooter = document.createElement('div')
-                            videoFooter.classList.add('block', 'p-1')
+                            videoFooter.classList.add('block', 'p-1', 'w-full', 'flex', 'flex-col', 'items-start', 'justify-center', 'bg-gray-100', 'rounded-b-lg')
 
                             const videoDescription = document.createElement('p');
                             videoDescription.classList.add('w-3/4', 'text-start', 'text-sm', 'lg:text-sm', 'font-italics', 'text-grey-700', 'h-auto', 'w-full', 'text-start',);

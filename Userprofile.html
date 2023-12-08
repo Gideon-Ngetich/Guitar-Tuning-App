@@ -276,12 +276,17 @@
                             loadingPage.style.display = 'none';
                             console.log('Data set successful');
                             location.reload();
+                            location.reload();
+                            location.reload();
+                            location.reload();
+                            location.reload();
                         })
                         .catch((error) => {
                             console.log(error);
                         });
 
                     console.log('Profile image uploaded successfully!');
+                    loadingPage.style.display = 'none';
                 } else {
                     console.log('User not logged in');
                 }
@@ -332,9 +337,9 @@
                     // set(databaseRef(db, 'Users/' + user.uid), { videoMetadata })
                     set(databaseRef(db, 'Users/' + user.uid + '/videos/' + videoMetadata.videoId), { videoMetadata })
                         .then(() => {
-                            loadingPage.style.display = 'none';
+                            
                             console.log('Data set successful')
-                            alert('Video is being uploaded please wait')
+                            // alert('Video is being uploaded please wait')
                             location.reload();
                         })
                         .catch((error) => {
@@ -342,13 +347,15 @@
                         }
                         )
 
+                    loadingPage.style.display = 'none';
                     console.log('Video uploaded successfully!');
 
                 } else {
+                    // window.location.href = 'login.html'
                     console.log('User not logged in')
                 }
 
-                decription.value = '';
+                description.value = '';
 
                 
             } catch (error) {
@@ -449,9 +456,10 @@
                 loadingPage.style.display = 'none';
                 videoContainer.style.display = 'flex';
             }
-            // } else {
-            //     console.log('User not logged in');
-            // }
+            else {
+                // window.location.href = 'login.html'
+                console.log('User not logged in');
+            }
         }
 
 
@@ -461,6 +469,7 @@
                 // Call fetchAndDisplayVideos when the user is logged in
                 fetchAndDisplayVideos();
             } else {
+                window.location.href = 'login.html'
                 console.log('User not logged in');
             }
         });

@@ -349,76 +349,7 @@
         })
 
 
-        // function fetchAndDisplayBlogs() {
-        //     const user = auth.currentUser;
-
-        //     if (user) {
-        //         const userId = user.uid;
-        //         const blogsRef = databaseRef(db, 'Users/' + userId + '/Blogs');
-        //         const blogContainer = document.getElementById('blog-container');
-
-        //         loadingPage.style.display = 'block';
-
-        //         // Fetch the blogs data from the database
-        //         onValue(blogsRef, (snapshot) => {
-        //             const blogsData = snapshot.val();
-
-
-        //             if (blogsData) {
-        //                 for (const blogId in blogsData) {
-        //                     const blog = blogsData[blogId].blogMetaData;
-
-        //                     // Create HTML elements to display the blog content
-        //                     const blogElement = document.createElement('div');
-        //                     blogElement.classList.add('blogElement', 'shadow-2xl', 'rounded-xl', 'p-5', 'm-5');
-
-        //                     const titleElement = document.createElement('h2');
-        //                     titleElement.classList.add('text-2xl', 'font-bold', 'mb-5');
-        //                     titleElement.textContent = blog.title;
-
-        //                     const contentElement = document.createElement('p');
-        //                     contentElement.textContent = blog.content;
-
-        //                     const fileType = blog.fileType;
-        //                     console.log(fileType)
-        //                     if (fileType.startsWith('image/')) {
-        //                         const bannerElement = document.createElement('img');
-        //                         bannerElement.classList.add('w-full', 'h-60');
-        //                         bannerElement.src = blog.banner;
-        //                         blogElement.appendChild(bannerElement);
-
-
-        //                     } else {
-        //                         const bannerElement = document.createElement('video');
-        //                         bannerElement.classList.add('w-full', 'h-60');
-        //                         bannerElement.src = blog.banner;
-        //                         bannerElement.controls = true;
-        //                         blogElement.appendChild(bannerElement);
-
-        //                     }
-
-        //                     const uploadDateElement = document.createElement('p');
-        //                     uploadDateElement.classList.add('text-sm', 'text-gray-500', 'm-4');
-        //                     uploadDateElement.textContent = blog.uploadDate;
-
-        //                     // Append the elements to the page
-        //                     blogElement.appendChild(titleElement);
-        //                     blogElement.appendChild(contentElement);
-        //                     blogElement.appendChild(uploadDateElement);
-
-
-        //                     blogContainer.appendChild(blogElement);
-        //                 }
-        //             }
-        //             // Loop through each blog
-
-        //         })
-
-
-        //     } else {
-        //         console.log('User not logged in');
-        //     }
-        // }
+        
 
         function fetchAndDisplayBlogs() {
             const user = auth.currentUser;
